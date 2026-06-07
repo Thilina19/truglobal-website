@@ -1,0 +1,535 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | TRU Global Recruitment & Consultants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold:#FFD700;--gold-light:#FFE55C;--gold-dark:#B8860B;
+      --red:#CC0000;--red-dark:#8B0000;
+      --black:#0A0A0A;--dark:#111111;--dark2:#1a1a1a;
+      --text:#333333;--text-light:#666666;--white:#FFFFFF;
+      --gradient:linear-gradient(135deg,#FFD700 0%,#CC0000 100%);
+      --gradient-lr:linear-gradient(90deg,#FFD700 0%,#CC0000 100%);
+      --gradient-tb:linear-gradient(180deg,#FFD700 0%,#CC0000 100%);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+    /* NAVBAR */
+    .navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s;background:rgba(10,10,10,.96);backdrop-filter:blur(12px);box-shadow:0 2px 30px rgba(0,0,0,.4);border-bottom:1px solid rgba(255,215,0,.08)}
+    .nav-logo{display:flex;align-items:center;text-decoration:none}
+    .nav-logo-img{height:72px;width:auto;background:white;padding:5px 10px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.3);transition:box-shadow .3s}
+    .nav-logo-img:hover{box-shadow:0 4px 20px rgba(255,215,0,.4)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .3s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gradient-lr);transition:width .3s}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+    .nav-wa{display:inline-flex;align-items:center;gap:.45rem;background:#25D366;color:#fff !important;padding:.5rem 1.1rem;border-radius:50px;font-weight:700;font-size:.82rem;text-decoration:none;transition:all .3s;box-shadow:0 3px 12px rgba(37,211,102,.3)}
+    .nav-wa:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(37,211,102,.45)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+    .hamburger span{width:24px;height:2px;background:white;border-radius:2px;transition:.3s}
+
+    /* PAGE HERO */
+    .page-hero{min-height:55vh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,rgba(180,0,0,.2) 0%,transparent 55%),radial-gradient(ellipse at 20% 70%,rgba(180,120,0,.12) 0%,transparent 50%),linear-gradient(135deg,#060606 0%,#120202 55%,#080808 100%);display:flex;align-items:center;justify-content:center}
+    .hero-particles{position:absolute;inset:0;pointer-events:none}
+    .page-hero-inner{text-align:center;padding:9rem 2rem 5rem;position:relative;z-index:2;max-width:760px;margin:0 auto}
+    .page-hero-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1.1rem;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);border-radius:50px;color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp .7s ease both}
+    .page-hero h1{font-size:clamp(2.6rem,5vw,4rem);font-weight:900;color:white;line-height:1.08;margin-bottom:1.2rem;animation:fadeUp .7s .1s ease both}
+    .page-hero h1 .grad{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-hero-desc{font-size:1.05rem;color:rgba(255,255,255,.6);line-height:1.85;max-width:560px;margin:0 auto 2rem;animation:fadeUp .7s .2s ease both}
+    .breadcrumb{display:flex;align-items:center;gap:.5rem;justify-content:center;font-size:.8rem;color:rgba(255,255,255,.4);animation:fadeUp .7s .3s ease both}
+    .breadcrumb a{color:rgba(255,255,255,.55);text-decoration:none;transition:color .3s}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb i{font-size:.6rem}
+    .hero-deco{position:absolute;border-radius:50%;pointer-events:none;background:var(--gradient);opacity:.06;filter:blur(60px)}
+    .hero-deco-1{width:400px;height:400px;top:-80px;right:-100px}
+    .hero-deco-2{width:300px;height:300px;bottom:-50px;left:-80px}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    /* MARQUEE */
+    .marquee-bar{background:var(--gradient-lr);padding:.7rem 0;overflow:hidden}
+    .marquee-track{display:flex;white-space:nowrap;animation:marqueeAnim 28s linear infinite}
+    .marquee-item{display:inline-flex;align-items:center;gap:.6rem;color:white;font-size:.88rem;font-weight:600;padding:0 2.5rem}
+    @keyframes marqueeAnim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* SECTION BASE */
+    section{padding:5.5rem 3rem}
+    .section-header{text-align:center;margin-bottom:4rem}
+    .sec-tag{display:inline-block;padding:.3rem 1rem;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);color:var(--gold-dark);font-size:.75rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;border-radius:50px;margin-bottom:.9rem}
+    .sec-title{font-size:clamp(1.7rem,3.2vw,2.65rem);font-weight:900;color:var(--black);margin-bottom:.9rem;line-height:1.18}
+    .sec-title .grad{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .sec-divider{width:70px;height:4px;background:var(--gradient-lr);margin:.8rem auto 1rem;border-radius:2px}
+    .sec-desc{max-width:580px;margin:0 auto;color:var(--text-light);font-size:1rem;line-height:1.85}
+
+    /* SERVICES GRID */
+    #services-main{background:#f7f7f7}
+    .svcs-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.85rem}
+    .svc-card{padding:2.5rem 2rem;border-radius:22px;border:1px solid #ededed;background:white;transition:all .4s;position:relative;overflow:hidden;cursor:default}
+    .svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--gradient-lr);transform:scaleX(0);transition:transform .4s}
+    .svc-card:hover::after{transform:scaleX(1)}
+    .svc-card:hover{transform:translateY(-10px);box-shadow:0 24px 60px rgba(0,0,0,.11);border-color:transparent}
+    .svc-number{font-size:.7rem;font-weight:900;color:rgba(255,215,0,.35);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:block}
+    .svc-icon{width:68px;height:68px;border-radius:18px;background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(204,0,0,.09));display:flex;align-items:center;justify-content:center;font-size:1.85rem;margin-bottom:1.5rem;transition:all .35s}
+    .svc-icon i{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .svc-card:hover .svc-icon{background:var(--gradient-lr)}
+    .svc-card:hover .svc-icon i{background:none;-webkit-text-fill-color:white}
+    .svc-card h3{font-size:1.1rem;font-weight:900;color:var(--black);margin-bottom:.8rem}
+    .svc-card p{color:var(--text-light);font-size:.88rem;line-height:1.8}
+    .svc-features{margin-top:1.3rem;display:flex;flex-direction:column;gap:.5rem}
+    .svc-feat{display:flex;align-items:center;gap:.55rem;font-size:.83rem;color:var(--text);font-weight:500}
+    .svc-feat i{color:var(--red);font-size:.75rem}
+    .svc-link{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.4rem;color:var(--red);font-weight:700;font-size:.83rem;text-decoration:none;transition:gap .3s}
+    .svc-link:hover{gap:.7rem}
+
+    /* FEATURED SERVICE - CV PREP */
+    #cv-section{background:linear-gradient(135deg,#080808 0%,#160000 50%,#0c0c0c 100%);color:white}
+    #cv-section .sec-tag{background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.25);color:var(--gold)}
+    #cv-section .sec-title{color:white}
+    .cv-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .cv-content h2{font-size:2rem;font-weight:900;color:white;margin-bottom:1.3rem;line-height:1.3}
+    .cv-content h2 .grad{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .cv-content p{color:rgba(255,255,255,.6);line-height:1.9;margin-bottom:1.2rem;font-size:.97rem}
+    .cv-steps{display:flex;flex-direction:column;gap:1rem;margin:1.8rem 0}
+    .cv-step{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 1.5rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;transition:all .35s}
+    .cv-step:hover{border-color:rgba(255,215,0,.2);background:rgba(255,215,0,.04)}
+    .cv-step-num{width:38px;height:38px;min-width:38px;background:var(--gradient-lr);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.95rem;color:white}
+    .cv-step-text h4{font-size:.92rem;font-weight:800;color:white;margin-bottom:.2rem}
+    .cv-step-text p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.65}
+    .cv-visual{position:relative}
+    .cv-visual img{width:100%;border-radius:22px;box-shadow:0 24px 70px rgba(0,0,0,.5);display:block}
+    .cv-badge{position:absolute;top:-1rem;right:-1rem;background:var(--gradient-lr);color:white;padding:1rem 1.4rem;border-radius:14px;box-shadow:0 8px 25px rgba(204,0,0,.35);text-align:center;animation:float1 3s ease-in-out infinite}
+    .cv-badge .big{font-size:1.8rem;font-weight:900;line-height:1}
+    .cv-badge .small{font-size:.7rem;opacity:.9;margin-top:.2rem;display:block}
+    @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .btn-wa{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.9rem;background:#25D366;color:white;border-radius:10px;font-size:.98rem;font-weight:700;text-decoration:none;transition:all .35s;box-shadow:0 4px 20px rgba(37,211,102,.32);margin-top:1.5rem}
+    .btn-wa:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,211,102,.5)}
+
+    /* PROCESS */
+    #process{background:white}
+    .process-steps{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+    .proc-step{display:flex;gap:2.5rem;align-items:flex-start;padding:2rem 0;position:relative}
+    .proc-step:not(:last-child)::after{content:'';position:absolute;left:31px;top:78px;bottom:0;width:2px;background:linear-gradient(to bottom,rgba(255,215,0,.3),rgba(204,0,0,.2))}
+    .proc-num{width:62px;height:62px;min-width:62px;background:var(--gradient-lr);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:white;box-shadow:0 6px 20px rgba(204,0,0,.25);flex-shrink:0}
+    .proc-content h3{font-size:1.05rem;font-weight:800;color:var(--black);margin-bottom:.5rem}
+    .proc-content p{font-size:.9rem;color:var(--text-light);line-height:1.8}
+
+    /* TESTIMONIALS */
+    #testimonials{background:#f7f7f7}
+    .testi-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
+    .testi-card{background:white;border-radius:20px;padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,.05);border:1px solid #eee;transition:all .3s}
+    .testi-card:hover{transform:translateY(-5px);box-shadow:0 14px 45px rgba(0,0,0,.1)}
+    .testi-stars{color:var(--gold);font-size:1rem;margin-bottom:.9rem;letter-spacing:.1em}
+    .testi-text{color:var(--text);font-size:.92rem;line-height:1.8;margin-bottom:1.4rem;font-style:italic}
+    .testi-author{display:flex;align-items:center;gap:.75rem}
+    .testi-av{width:46px;height:46px;border-radius:50%;background:var(--gradient-lr);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.1rem}
+    .testi-name{font-weight:800;font-size:.92rem;color:var(--black)}
+    .testi-role{font-size:.78rem;color:var(--text-light)}
+
+    /* CTA */
+    #cta-band{background:linear-gradient(135deg,#060606 0%,#160000 60%,#0c0c0c 100%);padding:5rem 3rem;text-align:center}
+    #cta-band h2{font-size:2.2rem;font-weight:900;color:white;margin-bottom:1rem}
+    #cta-band h2 .grad{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    #cta-band p{color:rgba(255,255,255,.6);font-size:1rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.8}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .btn-gold{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.9rem;background:var(--gradient-lr);color:white;border-radius:10px;font-size:.98rem;font-weight:700;text-decoration:none;transition:all .35s;box-shadow:0 4px 20px rgba(204,0,0,.25)}
+    .btn-gold:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(204,0,0,.4)}
+    .btn-outline{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.9rem;background:transparent;color:white;border:2px solid rgba(255,215,0,.4);border-radius:10px;font-size:.98rem;font-weight:600;text-decoration:none;transition:all .35s}
+    .btn-outline:hover{border-color:var(--gold);background:rgba(255,215,0,.08)}
+
+    /* FOOTER */
+    #footer{background:#0d2f4a;color:white;position:relative;overflow:hidden;margin-top:-1px}
+    #footerGlobe{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .footer-inner{position:relative;z-index:5}
+    .footer-main{max-width:1180px;margin:0 auto;padding:5rem 3rem 3rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem}
+    .fb-logo{display:flex;align-items:center;margin-bottom:1.2rem}.fb-logo-img{height:80px;width:auto;background:white;padding:5px 10px;border-radius:8px}
+    .fb-desc{font-size:.88rem;color:rgba(255,255,255,.88);line-height:1.8;margin-bottom:1.5rem;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+    .fb-social{display:flex;gap:.65rem}
+    .fs-btn{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9);text-decoration:none;font-size:.95rem;transition:all .3s}
+    .fs-btn:hover{background:var(--gradient-lr);border-color:transparent;color:white;transform:translateY(-3px)}
+    .fc h4{font-size:.82rem;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1.4rem;position:relative;padding-bottom:.7rem;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+    .fc h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--gradient-lr)}
+    .fc ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+    .fc ul a{color:rgba(255,255,255,.88);text-decoration:none;font-size:.88rem;transition:color .3s;display:flex;align-items:center;gap:.45rem;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,.5)}
+    .fc ul a i{font-size:.65rem}
+    .fc ul a:hover{color:var(--gold)}
+    .footer-bottom{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.15);padding:1.4rem 3rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.85);background:rgba(5,15,35,.55);backdrop-filter:blur(6px)}
+    .footer-bottom a{color:var(--gold);text-decoration:none;font-weight:700}
+
+    /* WA FLOAT */
+    .wa-float{position:fixed;bottom:2rem;right:2rem;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.75rem;color:white;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.45);z-index:9999;transition:transform .3s;animation:waPop 2.5s ease-in-out infinite}
+    .wa-float:hover{transform:scale(1.12)}
+    @keyframes waPop{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}50%{box-shadow:0 4px 40px rgba(37,211,102,.7),0 0 0 12px rgba(37,211,102,.08)}}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:translateY(0)}
+    .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal-l.on{opacity:1;transform:translateX(0)}
+    .reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal-r.on{opacity:1;transform:translateX(0)}
+    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
+    .delay-4{transition-delay:.4s}.delay-5{transition-delay:.5s}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){.svcs-grid{grid-template-columns:repeat(2,1fr)}.testi-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){
+      .hamburger{display:flex}
+      .nav-links{display:none;position:fixed;top:0;right:0;bottom:0;width:280px;background:#0d0d0d;padding:5rem 2rem 2rem;flex-direction:column;align-items:flex-start;gap:1.5rem;z-index:999;transform:translateX(100%);transition:transform .4s}
+      .nav-links.open{transform:translateX(0)}
+      .navbar{padding:1rem 1.5rem}
+      .svcs-grid,.testi-grid,.cv-grid{grid-template-columns:1fr}
+      section{padding:4rem 1.5rem}
+      .footer-main{grid-template-columns:1fr 1fr;gap:2rem}
+      .footer-bottom{flex-direction:column;gap:.5rem;text-align:center;padding:1.2rem 1.5rem}
+    }
+  </style>
+</head>
+<body>
+
+  <a href="https://wa.me/642902010404" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRU Global Recruitment & Consultants" class="nav-logo-img">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/642902010404" target="_blank" class="nav-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <canvas class="hero-particles" id="heroParticles"></canvas>
+    <div class="hero-deco hero-deco-1"></div>
+    <div class="hero-deco hero-deco-2"></div>
+    <div class="page-hero-inner">
+      <div class="page-hero-tag"><i class="fas fa-briefcase"></i>&nbsp; What We Offer</div>
+      <h1>Our <span class="grad">Services</span></h1>
+      <p class="page-hero-desc">Comprehensive recruitment and HR consulting solutions tailored to help organisations and individuals thrive in today's competitive landscape.</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><i class="fas fa-chevron-right"></i>
+        <span style="color:rgba(255,255,255,.7)">Services</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <div class="marquee-item"><i class="fas fa-star"></i> 5.0 Rating — 110+ Reviews</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-globe-asia"></i> 7+ Countries Served</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-users"></i> 150+ Successful Placements</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-headset"></i> 24/7 Online Support</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-briefcase"></i> Talent Acquisition Experts</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-star"></i> 5.0 Rating — 110+ Reviews</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-globe-asia"></i> 7+ Countries Served</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-users"></i> 150+ Successful Placements</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+    </div>
+  </div>
+
+  <!-- SERVICES MAIN GRID -->
+  <section id="services-main">
+    <div class="section-header">
+      <div class="sec-tag">Our Expertise</div>
+      <h2 class="sec-title">End-to-End <span class="grad">Recruitment Solutions</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">From talent sourcing to HR strategy, we offer a full suite of services to meet your workforce needs.</p>
+    </div>
+    <div class="svcs-grid">
+
+      <div class="svc-card reveal delay-1">
+        <span class="svc-number">01</span>
+        <div class="svc-icon"><i class="fas fa-search"></i></div>
+        <h3>Talent Acquisition</h3>
+        <p>Expert sourcing, screening, and placement of top-tier candidates across all industries and seniority levels. We find the right fit — not just the available one.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Permanent &amp; Temporary Roles</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Executive Search</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> International Placements</div>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="svc-card reveal delay-2">
+        <span class="svc-number">02</span>
+        <div class="svc-icon"><i class="fas fa-users-cog"></i></div>
+        <h3>HR Outsourcing</h3>
+        <p>Streamline your HR function by outsourcing to our expert team. We handle payroll, compliance, performance management, and employee relations — so you can focus on growth.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Payroll Management</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Compliance &amp; Legal</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Employee Relations</div>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="svc-card reveal delay-3">
+        <span class="svc-number">03</span>
+        <div class="svc-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>HR Consulting Services</h3>
+        <p>Strategic HR advisory tailored to your business objectives. From workforce planning and culture development to talent retention strategies and organisational design.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Workforce Planning</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Culture &amp; Engagement</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Talent Retention</div>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="svc-card reveal delay-1">
+        <span class="svc-number">04</span>
+        <div class="svc-icon"><i class="fas fa-file-alt"></i></div>
+        <h3>CV &amp; Interview Preparation</h3>
+        <p>Elevate your professional profile with our expert CV writing and interview coaching services. We've helped 150+ candidates land their dream roles with confidence.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Professional CV Writing</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> LinkedIn Profile Optimisation</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Mock Interview Coaching</div>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="svc-card reveal delay-2">
+        <span class="svc-number">05</span>
+        <div class="svc-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Background Verification</h3>
+        <p>Comprehensive pre-employment screening to protect your business and ensure you're hiring with complete confidence. Fast, thorough, and discreet.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Criminal Background Checks</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Reference Verification</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Qualification Checks</div>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="svc-card reveal delay-3">
+        <span class="svc-number">06</span>
+        <div class="svc-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Professional Development</h3>
+        <p>Customised training programs, leadership coaching, and career development workshops. Invest in your people — and watch your organisation flourish.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Leadership Coaching</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Management Training</div>
+          <div class="svc-feat"><i class="fas fa-check-circle"></i> Assessment Centres</div>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED: CV PREPARATION -->
+  <section id="cv-section">
+    <div class="cv-grid">
+      <div class="cv-content reveal-l">
+        <div class="sec-tag">Featured Service</div>
+        <h2>CV &amp; Career <span class="grad">Transformation</span></h2>
+        <p>Your CV is your first impression — and with the global job market more competitive than ever, it has to be exceptional. Our career coaches don't just write CVs; they craft compelling career narratives that get you noticed.</p>
+        <p>Whether you're a recent graduate, a seasoned executive, or looking to pivot industries, our tailored approach ensures your profile stands out in any market.</p>
+        <div class="cv-steps">
+          <div class="cv-step">
+            <div class="cv-step-num">1</div>
+            <div class="cv-step-text">
+              <h4>Discovery Consultation</h4>
+              <p>A 30-minute deep-dive into your career history, goals, and target roles.</p>
+            </div>
+          </div>
+          <div class="cv-step">
+            <div class="cv-step-num">2</div>
+            <div class="cv-step-text">
+              <h4>Professional CV Writing</h4>
+              <p>Our coaches craft an ATS-optimised, keyword-rich CV tailored to your target market.</p>
+            </div>
+          </div>
+          <div class="cv-step">
+            <div class="cv-step-num">3</div>
+            <div class="cv-step-text">
+              <h4>LinkedIn &amp; Profile Optimisation</h4>
+              <p>Complete overhaul of your online presence to attract recruiters and employers.</p>
+            </div>
+          </div>
+          <div class="cv-step">
+            <div class="cv-step-num">4</div>
+            <div class="cv-step-text">
+              <h4>Interview Coaching</h4>
+              <p>Mock interviews, feedback sessions, and strategies to walk into any room with confidence.</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/642902010404?text=Hello! I'm interested in CV Preparation services." target="_blank" class="btn-wa">
+          <i class="fab fa-whatsapp"></i> Start Your Career Journey
+        </a>
+      </div>
+      <div class="cv-visual reveal-r">
+        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=700&q=85" alt="CV Preparation Service" loading="lazy">
+        <div class="cv-badge">
+          <span class="big">98%</span>
+          <span class="small">Placement Rate</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="section-header">
+      <div class="sec-tag">How It Works</div>
+      <h2 class="sec-title">Our <span class="grad">Recruitment Process</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">A streamlined, transparent process designed to deliver the right outcomes — quickly and reliably.</p>
+    </div>
+    <div class="process-steps">
+      <div class="proc-step reveal">
+        <div class="proc-num">1</div>
+        <div class="proc-content">
+          <h3>Initial Consultation</h3>
+          <p>We start by understanding your organisation's culture, team dynamics, and the specific requirements of the role — or, for candidates, your career aspirations and goals.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal delay-1">
+        <div class="proc-num">2</div>
+        <div class="proc-content">
+          <h3>Talent Sourcing &amp; Screening</h3>
+          <p>Using our global network and advanced search tools, we identify, approach, and rigorously screen candidates against your specific criteria.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal delay-2">
+        <div class="proc-num">3</div>
+        <div class="proc-content">
+          <h3>Shortlisting &amp; Presentation</h3>
+          <p>We present a curated shortlist of pre-vetted candidates, complete with detailed profiles, assessments, and our recommendations.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal delay-3">
+        <div class="proc-num">4</div>
+        <div class="proc-content">
+          <h3>Interview Coordination</h3>
+          <p>We manage the entire interview process — scheduling, preparation, and facilitation — ensuring a smooth experience for both parties.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal delay-4">
+        <div class="proc-num">5</div>
+        <div class="proc-content">
+          <h3>Offer Management &amp; Onboarding</h3>
+          <p>From offer negotiation to seamless onboarding, we're with you every step of the way until the placement is successful and settled.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-header">
+      <div class="sec-tag">Client Stories</div>
+      <h2 class="sec-title">What Our <span class="grad">Clients Say</span></h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal delay-1">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="testi-text">"TRU Global's meticulous screening process helped us find the perfect Operations Manager. Their global network is truly impressive — highly recommend!"</p>
+        <div class="testi-author"><div class="testi-av">J</div><div><div class="testi-name">James Henderson</div><div class="testi-role">CEO, Auckland Enterprise</div></div></div>
+      </div>
+      <div class="testi-card reveal delay-2">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="testi-text">"The CV preparation service was truly transformative. I secured my Regional Manager role within weeks. TRU Global's guidance made all the difference!"</p>
+        <div class="testi-author"><div class="testi-av">R</div><div><div class="testi-name">Rahul Perera</div><div class="testi-role">Regional Manager, Dubai UAE</div></div></div>
+      </div>
+      <div class="testi-card reveal delay-3">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="testi-text">"Outstanding HR consulting service. They redesigned our entire recruitment strategy and we saw immediate improvements in both quality of hire and time-to-fill."</p>
+        <div class="testi-author"><div class="testi-av">S</div><div><div class="testi-name">Sarah Mitchell</div><div class="testi-role">HR Executive, Wellington Corp</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta-band">
+    <h2 class="reveal">Ready to Get <span class="grad">Started?</span></h2>
+    <p class="reveal delay-1">Contact us today to discuss your recruitment needs or career goals. We're ready to help.</p>
+    <div class="cta-btns reveal delay-2">
+      <a href="https://wa.me/642902010404?text=Hello TRU Global! I'd like to enquire about your services." target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+      <a href="contact.html" class="btn-outline"><i class="fas fa-envelope"></i> Send an Enquiry</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <canvas id="footerGlobe"></canvas>
+    <div class="footer-inner">
+      <div class="footer-main">
+        <div>
+          <div class="fb-logo"><img src="logo.png" alt="TRU Global" class="fb-logo-img"></div>
+          <p class="fb-desc">New Zealand's pioneer recruitment firm — connecting global talent with extraordinary opportunities across 7+ countries.</p>
+          <div class="fb-social">
+            <a href="#" class="fs-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="fs-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/642902010404" target="_blank" class="fs-btn"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="fc"><h4>Quick Links</h4><ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+          <li><a href="jobs.html"><i class="fas fa-chevron-right"></i> Jobs</a></li>
+          <li><a href="news.html"><i class="fas fa-chevron-right"></i> News</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul></div>
+        <div class="fc"><h4>Services</h4><ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Talent Acquisition</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> HR Outsourcing</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> HR Consulting</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> CV Preparation</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Background Check</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Prof. Development</a></li>
+        </ul></div>
+        <div class="fc"><h4>Contact</h4><ul>
+          <li><a href="tel:+6429139012"><i class="fas fa-phone"></i> +64 29 139 0012</a></li>
+          <li><a href="https://wa.me/642902010404" target="_blank"><i class="fab fa-whatsapp"></i> +64 29 020 10404</a></li>
+          <li><a href="mailto:contact@truglobalrec.co.nz"><i class="fas fa-envelope"></i> contact@truglobalrec.co.nz</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Albany, Auckland NZ</a></li>
+          <li><a href="#"><i class="fas fa-clock"></i> Monâ€“Sat: 9AMâ€“5PM</a></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TRU Global Recruitment &amp; Consultants. All rights reserved.</p>
+        <p><a href="https://truglobalrec.co.nz" target="_blank">truglobalrec.co.nz</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+  document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+  (function(){const pc=document.getElementById('heroParticles');const pctx=pc.getContext('2d');const particles=[];function resizeP(){pc.width=window.innerWidth;pc.height=pc.parentElement.offsetHeight}resizeP();window.addEventListener('resize',resizeP);for(let i=0;i<55;i++)particles.push({x:Math.random()*window.innerWidth,y:Math.random()*500,r:Math.random()*1.8+0.3,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,gold:Math.random()>0.5});function drawP(){pctx.clearRect(0,0,pc.width,pc.height);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=pc.width;if(p.x>pc.width)p.x=0;if(p.y<0)p.y=pc.height;if(p.y>pc.height)p.y=0;pctx.beginPath();pctx.arc(p.x,p.y,p.r,0,Math.PI*2);pctx.fillStyle=p.gold?'rgba(255,215,0,0.25)':'rgba(200,0,0,0.2)';pctx.fill()});requestAnimationFrame(drawP)}drawP()})();
+
+  (function(){const fc=document.getElementById('footerGlobe');const fctx=fc.getContext('2d');function resizeFc(){fc.width=fc.offsetWidth;fc.height=fc.offsetHeight;initScene()}class Cloud{constructor(w,h,anywhere){this.W=w;this.H=h;this.spawn(anywhere)}spawn(anywhere){this.depth=Math.floor(Math.random()*3);const scale=0.55+this.depth*0.35;this.baseR=(60+Math.random()*90)*scale;this.speed=(0.12+Math.random()*0.22)*(0.6+this.depth*0.4);this.x=anywhere?Math.random()*(this.W+this.baseR*4)-this.baseR*2:this.W+this.baseR*2+Math.random()*200;const yBand=this.depth===0?0.08:this.depth===1?0.18:0.25;this.y=this.H*yBand+Math.random()*this.H*0.55;this.wobble=Math.random()*Math.PI*2;this.wSpeed=0.003+Math.random()*0.005;this.bright=this.depth===0?170:this.depth===1?195:215;this.alpha=this.depth===0?0.28:this.depth===1?0.38:0.50;this.puffs=[];const n=4+Math.floor(Math.random()*6);for(let i=0;i<n;i++){const angle=(i/n)*Math.PI*2;const spread=this.baseR*(0.4+Math.random()*0.7);this.puffs.push({ox:Math.cos(angle)*spread*0.9+(Math.random()-0.5)*this.baseR*0.5,oy:Math.sin(angle)*spread*0.5+(Math.random()-0.5)*this.baseR*0.25,r:this.baseR*(0.38+Math.random()*0.62)})}this.puffs.push({ox:0,oy:-this.baseR*0.18,r:this.baseR*1.05})}draw(ctx,t){const wy=Math.sin(t*this.wSpeed+this.wobble)*4;const b=this.bright;this.puffs.forEach(p=>{const px=this.x+p.ox;const py=this.y+p.oy+wy;const shadow=ctx.createRadialGradient(px,py+p.r*0.3,0,px,py+p.r*0.3,p.r*0.8);shadow.addColorStop(0,`rgba(140,175,210,${this.alpha*0.18})`);shadow.addColorStop(1,'rgba(140,175,210,0)');ctx.beginPath();ctx.arc(px,py+p.r*0.3,p.r*0.8,0,Math.PI*2);ctx.fillStyle=shadow;ctx.fill();const g=ctx.createRadialGradient(px-p.r*0.22,py-p.r*0.22,p.r*0.05,px,py,p.r);g.addColorStop(0,`rgba(255,255,255,${this.alpha})`);g.addColorStop(0.45,`rgba(${b},${b},${b},${this.alpha*0.88})`);g.addColorStop(0.75,`rgba(${b-10},${b},${b+5},${this.alpha*0.55})`);g.addColorStop(1,`rgba(${b-20},${b-10},${b+10},0)`);ctx.beginPath();ctx.arc(px,py,p.r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();const hl=ctx.createRadialGradient(px-p.r*0.3,py-p.r*0.3,0,px-p.r*0.3,py-p.r*0.3,p.r*0.6);hl.addColorStop(0,`rgba(255,255,255,${this.alpha*0.45})`);hl.addColorStop(1,'rgba(255,255,255,0)');ctx.beginPath();ctx.arc(px-p.r*0.3,py-p.r*0.3,p.r*0.6,0,Math.PI*2);ctx.fillStyle=hl;ctx.fill()});this.x-=this.speed;if(this.x<-this.baseR*3)this.spawn(false)}}class Bird{constructor(w,h){this.W=w;this.H=h;this.reset()}reset(){this.x=-40;this.y=this.H*(0.05+Math.random()*0.45);this.speed=0.5+Math.random()*0.8;this.size=3+Math.random()*4;this.flapT=Math.random()*Math.PI*2;this.flapS=0.06+Math.random()*0.06}draw(ctx,t){const flap=Math.sin(t*this.flapS+this.flapT)*this.size*0.6;ctx.save();ctx.translate(this.x,this.y);ctx.strokeStyle='rgba(30,60,110,0.5)';ctx.lineWidth=1.2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-this.size,-flap);ctx.quadraticCurveTo(0,flap*0.5,this.size,-flap);ctx.stroke();ctx.restore();this.x+=this.speed;if(this.x>this.W+60)this.reset()}}let clouds=[],birds=[];function initScene(){const w=fc.width,h=fc.height;clouds=[];birds=[];[5,6,4].forEach((count,depth)=>{for(let i=0;i<count;i++){const c=new Cloud(w,h,true);c.depth=depth;const scale=0.55+depth*0.35;c.baseR=(60+Math.random()*90)*scale;c.speed=(0.12+Math.random()*0.22)*(0.6+depth*0.4);clouds.push(c)}});for(let i=0;i<4;i++){const b=new Bird(w,h);b.x=Math.random()*w;birds.push(b)}}resizeFc();window.addEventListener('resize',resizeFc);let t=0;function drawFooter(){const fw=fc.width,fh=fc.height;fctx.clearRect(0,0,fw,fh);const sky=fctx.createLinearGradient(0,0,0,fh);sky.addColorStop(0,'#0a1e35');sky.addColorStop(0.30,'#0e3358');sky.addColorStop(0.65,'#1a5580');sky.addColorStop(0.85,'#1f6a96');sky.addColorStop(1,'#2a7aaa');fctx.fillStyle=sky;fctx.fillRect(0,0,fw,fh);const sunX=fw*0.82,sunY=fh*0.06;const sunG=fctx.createRadialGradient(sunX,sunY,0,sunX,sunY,fh*0.55);sunG.addColorStop(0,'rgba(255,220,120,0.18)');sunG.addColorStop(0.15,'rgba(255,200,80,0.09)');sunG.addColorStop(0.4,'rgba(255,180,40,0.04)');sunG.addColorStop(1,'rgba(255,160,0,0)');fctx.fillStyle=sunG;fctx.fillRect(0,0,fw,fh);[0,1,2].forEach(d=>clouds.filter(c=>c.depth===d).forEach(c=>c.draw(fctx,t)));birds.forEach(b=>b.draw(fctx,t));t++;requestAnimationFrame(drawFooter)}drawFooter()})();
+
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

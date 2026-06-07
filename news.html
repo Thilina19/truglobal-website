@@ -1,0 +1,447 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News & Insights | TRU Global Recruitment & Consultants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{--gold:#FFD700;--gold-dark:#B8860B;--red:#CC0000;--text:#333;--text-light:#666;--black:#0A0A0A;--gradient-lr:linear-gradient(90deg,#FFD700 0%,#CC0000 100%);--gradient:linear-gradient(135deg,#FFD700 0%,#CC0000 100%)}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+    .navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,.96);backdrop-filter:blur(12px);box-shadow:0 2px 30px rgba(0,0,0,.4);border-bottom:1px solid rgba(255,215,0,.08)}
+    .nav-logo{display:flex;align-items:center;text-decoration:none}
+    .nav-logo-img{height:72px;width:auto;background:white;padding:5px 10px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.3);transition:box-shadow .3s}
+    .nav-logo-img:hover{box-shadow:0 4px 20px rgba(255,215,0,.4)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .3s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gradient-lr);transition:width .3s}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+    .nav-wa{display:inline-flex;align-items:center;gap:.45rem;background:#25D366;color:#fff !important;padding:.5rem 1.1rem;border-radius:50px;font-weight:700;font-size:.82rem;text-decoration:none;transition:all .3s;box-shadow:0 3px 12px rgba(37,211,102,.3)}
+    .nav-wa:hover{transform:scale(1.06)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+    .hamburger span{width:24px;height:2px;background:white;border-radius:2px}
+
+    /* PAGE HERO */
+    .page-hero{min-height:55vh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,rgba(180,0,0,.2) 0%,transparent 55%),radial-gradient(ellipse at 20% 70%,rgba(180,120,0,.12) 0%,transparent 50%),linear-gradient(135deg,#060606 0%,#120202 55%,#080808 100%);display:flex;align-items:center;justify-content:center}
+    .hero-particles{position:absolute;inset:0;pointer-events:none}
+    .page-hero-inner{text-align:center;padding:9rem 2rem 5rem;position:relative;z-index:2;max-width:760px;margin:0 auto}
+    .page-hero-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1.1rem;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);border-radius:50px;color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp .7s ease both}
+    .page-hero h1{font-size:clamp(2.6rem,5vw,4rem);font-weight:900;color:white;line-height:1.08;margin-bottom:1.2rem;animation:fadeUp .7s .1s ease both}
+    .page-hero h1 .grad{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-hero-desc{font-size:1.05rem;color:rgba(255,255,255,.6);line-height:1.85;max-width:560px;margin:0 auto 2rem;animation:fadeUp .7s .2s ease both}
+    .breadcrumb{display:flex;align-items:center;gap:.5rem;justify-content:center;font-size:.8rem;color:rgba(255,255,255,.4);animation:fadeUp .7s .3s ease both}
+    .breadcrumb a{color:rgba(255,255,255,.55);text-decoration:none;transition:color .3s}
+    .breadcrumb a:hover{color:var(--gold)}.breadcrumb i{font-size:.6rem}
+    .hero-deco{position:absolute;border-radius:50%;pointer-events:none;background:var(--gradient);opacity:.06;filter:blur(60px)}
+    .hero-deco-1{width:400px;height:400px;top:-80px;right:-100px}
+    .hero-deco-2{width:300px;height:300px;bottom:-50px;left:-80px}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    /* MARQUEE */
+    .marquee-bar{background:var(--gradient-lr);padding:.7rem 0;overflow:hidden}
+    .marquee-track{display:flex;white-space:nowrap;animation:marqueeAnim 28s linear infinite}
+    .marquee-item{display:inline-flex;align-items:center;gap:.6rem;color:white;font-size:.88rem;font-weight:600;padding:0 2.5rem}
+    @keyframes marqueeAnim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    section{padding:5.5rem 3rem}
+    .section-header{text-align:center;margin-bottom:4rem}
+    .sec-tag{display:inline-block;padding:.3rem 1rem;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);color:var(--gold-dark);font-size:.75rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;border-radius:50px;margin-bottom:.9rem}
+    .sec-title{font-size:clamp(1.7rem,3.2vw,2.65rem);font-weight:900;color:var(--black);margin-bottom:.9rem;line-height:1.18}
+    .sec-title .grad{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .sec-divider{width:70px;height:4px;background:var(--gradient-lr);margin:.8rem auto 1rem;border-radius:2px}
+    .sec-desc{max-width:580px;margin:0 auto;color:var(--text-light);font-size:1rem;line-height:1.85}
+
+    /* FEATURED ARTICLE */
+    #featured{background:#f7f7f7}
+    .featured-wrap{max-width:1180px;margin:0 auto}
+    .featured-card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 12px 50px rgba(0,0,0,.1);display:grid;grid-template-columns:1.2fr 1fr;transition:all .35s}
+    .featured-card:hover{transform:translateY(-6px);box-shadow:0 24px 70px rgba(0,0,0,.15)}
+    .featured-img{position:relative;overflow:hidden;min-height:380px}
+    .featured-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .featured-card:hover .featured-img img{transform:scale(1.04)}
+    .feat-cat{position:absolute;top:1.5rem;left:1.5rem;padding:.3rem .9rem;background:var(--gradient-lr);color:white;border-radius:50px;font-size:.75rem;font-weight:800;letter-spacing:.08em}
+    .feat-date{position:absolute;top:1.5rem;right:1.5rem;padding:.3rem .9rem;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);color:white;border-radius:50px;font-size:.75rem;font-weight:600}
+    .featured-content{padding:3rem;display:flex;flex-direction:column;justify-content:center}
+    .feat-tag{font-size:.72rem;font-weight:800;color:var(--gold-dark);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem}
+    .featured-content h2{font-size:1.7rem;font-weight:900;color:var(--black);line-height:1.3;margin-bottom:1.2rem}
+    .featured-content p{font-size:.92rem;color:var(--text-light);line-height:1.85;margin-bottom:1.5rem}
+    .feat-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+    .feat-av{width:40px;height:40px;border-radius:50%;background:var(--gradient-lr);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:.9rem;flex-shrink:0}
+    .feat-author-info{font-size:.82rem}
+    .feat-author-info strong{color:var(--black);display:block;font-weight:700}
+    .feat-author-info span{color:var(--text-light)}
+    .feat-read{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--text-light);margin-left:auto}
+    .btn-read{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.4rem;background:var(--gradient-lr);color:white;border-radius:9px;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .3s}
+    .btn-read:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(204,0,0,.3)}
+
+    /* CATEGORY TABS */
+    #news-section{background:white}
+    .cat-tabs{display:flex;gap:.65rem;flex-wrap:wrap;margin-bottom:3rem;justify-content:center}
+    .cat-tab{padding:.4rem 1.2rem;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:50px;font-size:.83rem;font-weight:700;color:var(--text);cursor:pointer;transition:all .3s}
+    .cat-tab:hover,.cat-tab.active{background:var(--gradient-lr);color:white;border-color:transparent}
+
+    /* NEWS GRID */
+    .news-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+    .news-card{background:white;border-radius:20px;overflow:hidden;border:1px solid #eee;transition:all .35s}
+    .news-card:hover{transform:translateY(-8px);box-shadow:0 20px 55px rgba(0,0,0,.12)}
+    .news-img{position:relative;height:210px;overflow:hidden}
+    .news-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .news-card:hover .news-img img{transform:scale(1.06)}
+    .news-cat{position:absolute;top:1rem;left:1rem;padding:.25rem .8rem;background:var(--gradient-lr);color:white;border-radius:50px;font-size:.72rem;font-weight:800}
+    .news-body{padding:1.5rem}
+    .news-date{font-size:.75rem;color:var(--text-light);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+    .news-date i{color:var(--red);font-size:.7rem}
+    .news-card h3{font-size:.98rem;font-weight:800;color:var(--black);margin-bottom:.65rem;line-height:1.4}
+    .news-card p{font-size:.85rem;color:var(--text-light);line-height:1.75;margin-bottom:1.1rem}
+    .news-footer{display:flex;align-items:center;justify-content:space-between}
+    .news-author{display:flex;align-items:center;gap:.5rem;font-size:.78rem}
+    .news-av{width:30px;height:30px;border-radius:50%;background:var(--gradient-lr);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:.72rem}
+    .news-author-name{color:var(--text);font-weight:600}
+    .news-link{display:flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:700;color:var(--red);text-decoration:none;transition:gap .3s}
+    .news-link:hover{gap:.55rem}
+
+    /* NEWSLETTER */
+    #newsletter{background:linear-gradient(135deg,#080808 0%,#160000 50%,#0c0c0c 100%);text-align:center}
+    .nl-wrap{max-width:640px;margin:0 auto}
+    #newsletter .sec-tag{background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.25);color:var(--gold)}
+    .nl-title{font-size:2.2rem;font-weight:900;color:white;margin-bottom:1rem}
+    .nl-title .grad{background:var(--gradient-lr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nl-desc{color:rgba(255,255,255,.6);font-size:.97rem;line-height:1.85;margin-bottom:2rem}
+    .nl-form{display:flex;gap:1rem;max-width:480px;margin:0 auto 1rem}
+    .nl-input{flex:1;padding:.9rem 1.3rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-size:.92rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .3s}
+    .nl-input:focus{border-color:var(--gold)}
+    .nl-input::placeholder{color:rgba(255,255,255,.3)}
+    .nl-btn{padding:.9rem 1.6rem;background:var(--gradient-lr);color:white;border:none;border-radius:10px;font-weight:800;font-size:.92rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .3s;white-space:nowrap}
+    .nl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(204,0,0,.4)}
+    .nl-note{font-size:.75rem;color:rgba(255,255,255,.35)}
+    .nl-or{font-size:.85rem;color:rgba(255,255,255,.45);margin:1.5rem 0}
+    .btn-wa-nl{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1.8rem;background:#25D366;color:white;border-radius:10px;font-weight:700;font-size:.92rem;text-decoration:none;transition:all .35s;box-shadow:0 4px 15px rgba(37,211,102,.28)}
+    .btn-wa-nl:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.45)}
+
+    /* FOOTER */
+    #footer{background:#0d2f4a;color:white;position:relative;overflow:hidden;margin-top:-1px}
+    #footerGlobe{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .footer-inner{position:relative;z-index:5}
+    .footer-main{max-width:1180px;margin:0 auto;padding:5rem 3rem 3rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem}
+    .fb-logo{display:flex;align-items:center;margin-bottom:1.2rem}.fb-logo-img{height:80px;width:auto;background:white;padding:5px 10px;border-radius:8px}
+    .fb-desc{font-size:.88rem;color:rgba(255,255,255,.88);line-height:1.8;margin-bottom:1.5rem;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+    .fb-social{display:flex;gap:.65rem}
+    .fs-btn{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9);text-decoration:none;font-size:.95rem;transition:all .3s}
+    .fs-btn:hover{background:var(--gradient-lr);border-color:transparent;color:white;transform:translateY(-3px)}
+    .fc h4{font-size:.82rem;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1.4rem;position:relative;padding-bottom:.7rem;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+    .fc h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--gradient-lr)}
+    .fc ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+    .fc ul a{color:rgba(255,255,255,.88);text-decoration:none;font-size:.88rem;transition:color .3s;display:flex;align-items:center;gap:.45rem;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,.5)}
+    .fc ul a i{font-size:.65rem}.fc ul a:hover{color:var(--gold)}
+    .footer-bottom{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.15);padding:1.4rem 3rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.85);background:rgba(5,15,35,.55);backdrop-filter:blur(6px)}
+    .footer-bottom a{color:var(--gold);text-decoration:none;font-weight:700}
+    .wa-float{position:fixed;bottom:2rem;right:2rem;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.75rem;color:white;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.45);z-index:9999;transition:transform .3s;animation:waPop 2.5s ease-in-out infinite}
+    .wa-float:hover{transform:scale(1.12)}
+    @keyframes waPop{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}50%{box-shadow:0 4px 40px rgba(37,211,102,.7),0 0 0 12px rgba(37,211,102,.08)}}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}.reveal.on{opacity:1;transform:translateY(0)}
+    .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease}.reveal-l.on{opacity:1;transform:translateX(0)}
+    .reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s ease,transform .65s ease}.reveal-r.on{opacity:1;transform:translateX(0)}
+    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
+
+    @media(max-width:1024px){.news-grid{grid-template-columns:repeat(2,1fr)}.featured-card{grid-template-columns:1fr}}
+    @media(max-width:768px){
+      .hamburger{display:flex}
+      .nav-links{display:none;position:fixed;top:0;right:0;bottom:0;width:280px;background:#0d0d0d;padding:5rem 2rem 2rem;flex-direction:column;align-items:flex-start;gap:1.5rem;z-index:999;transform:translateX(100%);transition:transform .4s}
+      .nav-links.open{transform:translateX(0)}
+      .navbar{padding:1rem 1.5rem}
+      .news-grid{grid-template-columns:1fr}
+      .nl-form{flex-direction:column}
+      section{padding:4rem 1.5rem}
+      .footer-main{grid-template-columns:1fr 1fr;gap:2rem}
+      .footer-bottom{flex-direction:column;gap:.5rem;text-align:center;padding:1.2rem 1.5rem}
+    }
+  </style>
+</head>
+<body>
+
+  <a href="https://wa.me/642902010404" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRU Global Recruitment & Consultants" class="nav-logo-img">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="news.html" class="active">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/642902010404" target="_blank" class="nav-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <canvas class="hero-particles" id="heroParticles"></canvas>
+    <div class="hero-deco hero-deco-1"></div>
+    <div class="hero-deco hero-deco-2"></div>
+    <div class="page-hero-inner">
+      <div class="page-hero-tag"><i class="fas fa-newspaper"></i>&nbsp; Industry Insights</div>
+      <h1>News &amp; <span class="grad">Insights</span></h1>
+      <p class="page-hero-desc">Stay ahead of the market with expert recruitment insights, career tips, industry news, and updates from TRU Global.</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><i class="fas fa-chevron-right"></i>
+        <span style="color:rgba(255,255,255,.7)">News</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <div class="marquee-item"><i class="fas fa-star"></i> 5.0 Rating — 110+ Reviews</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-globe-asia"></i> 7+ Countries Served</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-newspaper"></i> Latest Industry Insights</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-briefcase"></i> Career Tips &amp; Guidance</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-star"></i> 5.0 Rating — 110+ Reviews</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-globe-asia"></i> 7+ Countries Served</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+      <div class="marquee-item"><i class="fas fa-newspaper"></i> Latest Industry Insights</div>
+      <div class="marquee-item"><span style="color:rgba(255,255,255,.4)">•</span></div>
+    </div>
+  </div>
+
+  <!-- FEATURED ARTICLE -->
+  <section id="featured">
+    <div class="section-header">
+      <div class="sec-tag">Editor's Pick</div>
+      <h2 class="sec-title">Featured <span class="grad">Article</span></h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="featured-wrap">
+      <div class="featured-card reveal">
+        <div class="featured-img">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=85" alt="NZ Talent Market 2024" loading="lazy">
+          <span class="feat-cat">Recruitment Trends</span>
+          <span class="feat-date">June 2024</span>
+        </div>
+        <div class="featured-content">
+          <div class="feat-tag">&#128293; Trending Now</div>
+          <h2>New Zealand's Talent Market in 2024: What Employers Need to Know</h2>
+          <p>The New Zealand labour market continues to evolve at pace. With record immigration levels, shifting candidate expectations, and growing demand for skilled professionals across healthcare, IT, and construction, employers must adapt their hiring strategies now.</p>
+          <div class="feat-meta">
+            <div class="feat-av">U</div>
+            <div class="feat-author-info">
+              <strong>Mr. Upul Chandima</strong>
+              <span>Founder & Director, TRU Global</span>
+            </div>
+            <div class="feat-read"><i class="fas fa-clock"></i> 6 min read</div>
+          </div>
+          <a href="https://wa.me/642902010404?text=Hi! I read your article on NZ's talent market and have some questions." target="_blank" class="btn-read">
+            Discuss with Our Team <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS GRID -->
+  <section id="news-section">
+    <div class="section-header">
+      <div class="sec-tag">Latest Articles</div>
+      <h2 class="sec-title">Recruitment News &amp; <span class="grad">Career Advice</span></h2>
+      <div class="sec-divider"></div>
+    </div>
+
+    <div class="cat-tabs">
+      <div class="cat-tab active">All</div>
+      <div class="cat-tab">Recruitment Tips</div>
+      <div class="cat-tab">Career Advice</div>
+      <div class="cat-tab">NZ Market</div>
+      <div class="cat-tab">Middle East</div>
+      <div class="cat-tab">HR Strategy</div>
+    </div>
+
+    <div class="news-grid">
+      <div class="news-card reveal delay-1">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=500&q=85" alt="CV Tips" loading="lazy">
+          <span class="news-cat">Career Advice</span>
+        </div>
+        <div class="news-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> 5 June 2024</div>
+          <h3>10 CV Mistakes That Are Costing You Interviews in 2024</h3>
+          <p>With hiring managers spending an average of just 7 seconds scanning a CV, first impressions are everything. Here are the most common — and costly — mistakes we see every day.</p>
+          <div class="news-footer">
+            <div class="news-author"><div class="news-av">T</div><span class="news-author-name">TRU Global Team</span></div>
+            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card reveal delay-2">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=85" alt="Salary Guide" loading="lazy">
+          <span class="news-cat">NZ Market</span>
+        </div>
+        <div class="news-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> 28 May 2024</div>
+          <h3>NZ Salary Guide 2024: What Are Professionals Actually Earning?</h3>
+          <p>Our annual salary guide covers benchmark compensation across key industries in New Zealand — from entry-level roles to executive positions — to help you negotiate with confidence.</p>
+          <div class="news-footer">
+            <div class="news-author"><div class="news-av">U</div><span class="news-author-name">Upul Chandima</span></div>
+            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card reveal delay-3">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=85" alt="Interview" loading="lazy">
+          <span class="news-cat">Career Advice</span>
+        </div>
+        <div class="news-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> 20 May 2024</div>
+          <h3>How to Ace Any Job Interview: A Recruiter's Inside Guide</h3>
+          <p>After placing 150+ candidates, our recruiters share the interview strategies that consistently separate successful candidates from the rest — beyond just practising your answers.</p>
+          <div class="news-footer">
+            <div class="news-author"><div class="news-av">T</div><span class="news-author-name">TRU Global Team</span></div>
+            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card reveal delay-1">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=85" alt="Dubai Jobs" loading="lazy">
+          <span class="news-cat">Middle East</span>
+        </div>
+        <div class="news-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> 12 May 2024</div>
+          <h3>Working in Dubai: What NZ & Sri Lankan Professionals Need to Know</h3>
+          <p>Dubai continues to be a top destination for international professionals. We break down visa requirements, salary expectations, cultural considerations, and how TRU Global can help you land there.</p>
+          <div class="news-footer">
+            <div class="news-author"><div class="news-av">T</div><span class="news-author-name">TRU Global Team</span></div>
+            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card reveal delay-2">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&q=85" alt="HR Outsourcing" loading="lazy">
+          <span class="news-cat">HR Strategy</span>
+        </div>
+        <div class="news-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> 3 May 2024</div>
+          <h3>Why More NZ Businesses Are Outsourcing HR in 2024</h3>
+          <p>With labour law complexity increasing and HR talent scarce, outsourcing HR functions is becoming a strategic priority for NZ SMEs. Here's what you need to consider before making the move.</p>
+          <div class="news-footer">
+            <div class="news-author"><div class="news-av">U</div><span class="news-author-name">Upul Chandima</span></div>
+            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card reveal delay-3">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=500&q=85" alt="Candidate Experience" loading="lazy">
+          <span class="news-cat">Recruitment Tips</span>
+        </div>
+        <div class="news-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> 22 Apr 2024</div>
+          <h3>The Candidate Experience: Why It Matters More Than Ever</h3>
+          <p>In a candidate-driven market, how you treat applicants — especially those who don't get the job — directly impacts your employer brand. Our recruiters explain what top employers do differently.</p>
+          <div class="news-footer">
+            <div class="news-author"><div class="news-av">T</div><span class="news-author-name">TRU Global Team</span></div>
+            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="nl-wrap reveal">
+      <div class="sec-tag">Stay Updated</div>
+      <h2 class="nl-title">Get Recruitment Insights <span class="grad">Delivered</span></h2>
+      <p class="nl-desc">Join 1,200+ professionals who receive our weekly digest of NZ job market insights, career tips, and exclusive opportunities direct to their inbox.</p>
+      <form class="nl-form" onsubmit="nlSubmit(event)">
+        <input type="email" class="nl-input" placeholder="Your email address" required>
+        <button type="submit" class="nl-btn">Subscribe</button>
+      </form>
+      <p class="nl-note">No spam, ever. Unsubscribe anytime.</p>
+      <div class="nl-or">— or reach us instantly on —</div>
+      <a href="https://wa.me/642902010404?text=Hi! I'd like to stay updated on TRU Global's news and job opportunities." target="_blank" class="btn-wa-nl">
+        <i class="fab fa-whatsapp"></i> Follow Us on WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <canvas id="footerGlobe"></canvas>
+    <div class="footer-inner">
+      <div class="footer-main">
+        <div>
+          <div class="fb-logo"><img src="logo.png" alt="TRU Global" class="fb-logo-img"></div>
+          <p class="fb-desc">New Zealand's pioneer recruitment firm — connecting global talent with extraordinary opportunities across 7+ countries.</p>
+          <div class="fb-social">
+            <a href="#" class="fs-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="fs-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/642902010404" target="_blank" class="fs-btn"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="fc"><h4>Quick Links</h4><ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+          <li><a href="jobs.html"><i class="fas fa-chevron-right"></i> Jobs</a></li>
+          <li><a href="news.html"><i class="fas fa-chevron-right"></i> News</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul></div>
+        <div class="fc"><h4>Services</h4><ul>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> Talent Acquisition</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> HR Outsourcing</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> HR Consulting</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> CV Preparation</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> Background Check</a></li>
+        </ul></div>
+        <div class="fc"><h4>Contact</h4><ul>
+          <li><a href="tel:+6429139012"><i class="fas fa-phone"></i> +64 29 139 0012</a></li>
+          <li><a href="https://wa.me/642902010404" target="_blank"><i class="fab fa-whatsapp"></i> +64 29 020 10404</a></li>
+          <li><a href="mailto:contact@truglobalrec.co.nz"><i class="fas fa-envelope"></i> contact@truglobalrec.co.nz</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Albany, Auckland NZ</a></li>
+          <li><a href="#"><i class="fas fa-clock"></i> Mon–Sat: 9AM–5PM</a></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TRU Global Recruitment &amp; Consultants. All rights reserved.</p>
+        <p><a href="https://truglobalrec.co.nz" target="_blank">truglobalrec.co.nz</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+  document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+  document.querySelectorAll('.cat-tab').forEach(t=>t.addEventListener('click',function(){document.querySelectorAll('.cat-tab').forEach(x=>x.classList.remove('active'));this.classList.add('active')}));
+  function nlSubmit(e){e.preventDefault();e.target.querySelector('input').value='';alert('Thank you for subscribing! Welcome to the TRU Global community.')}
+
+  (function(){const pc=document.getElementById('heroParticles');const pctx=pc.getContext('2d');const particles=[];function resizeP(){pc.width=window.innerWidth;pc.height=pc.parentElement.offsetHeight}resizeP();window.addEventListener('resize',resizeP);for(let i=0;i<55;i++)particles.push({x:Math.random()*window.innerWidth,y:Math.random()*500,r:Math.random()*1.8+0.3,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,gold:Math.random()>0.5});function drawP(){pctx.clearRect(0,0,pc.width,pc.height);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=pc.width;if(p.x>pc.width)p.x=0;if(p.y<0)p.y=pc.height;if(p.y>pc.height)p.y=0;pctx.beginPath();pctx.arc(p.x,p.y,p.r,0,Math.PI*2);pctx.fillStyle=p.gold?'rgba(255,215,0,0.25)':'rgba(200,0,0,0.2)';pctx.fill()});requestAnimationFrame(drawP)}drawP()})();
+
+  (function(){const fc=document.getElementById('footerGlobe');const fctx=fc.getContext('2d');function resizeFc(){fc.width=fc.offsetWidth;fc.height=fc.offsetHeight;initScene()}class Cloud{constructor(w,h,anywhere){this.W=w;this.H=h;this.spawn(anywhere)}spawn(anywhere){this.depth=Math.floor(Math.random()*3);const scale=0.55+this.depth*0.35;this.baseR=(60+Math.random()*90)*scale;this.speed=(0.12+Math.random()*0.22)*(0.6+this.depth*0.4);this.x=anywhere?Math.random()*(this.W+this.baseR*4)-this.baseR*2:this.W+this.baseR*2+Math.random()*200;const yBand=this.depth===0?0.08:this.depth===1?0.18:0.25;this.y=this.H*yBand+Math.random()*this.H*0.55;this.wobble=Math.random()*Math.PI*2;this.wSpeed=0.003+Math.random()*0.005;this.bright=this.depth===0?170:this.depth===1?195:215;this.alpha=this.depth===0?0.28:this.depth===1?0.38:0.50;this.puffs=[];const n=4+Math.floor(Math.random()*6);for(let i=0;i<n;i++){const angle=(i/n)*Math.PI*2;const spread=this.baseR*(0.4+Math.random()*0.7);this.puffs.push({ox:Math.cos(angle)*spread*0.9+(Math.random()-0.5)*this.baseR*0.5,oy:Math.sin(angle)*spread*0.5+(Math.random()-0.5)*this.baseR*0.25,r:this.baseR*(0.38+Math.random()*0.62)})}this.puffs.push({ox:0,oy:-this.baseR*0.18,r:this.baseR*1.05})}draw(ctx,t){const wy=Math.sin(t*this.wSpeed+this.wobble)*4;const b=this.bright;this.puffs.forEach(p=>{const px=this.x+p.ox;const py=this.y+p.oy+wy;const shadow=ctx.createRadialGradient(px,py+p.r*0.3,0,px,py+p.r*0.3,p.r*0.8);shadow.addColorStop(0,`rgba(140,175,210,${this.alpha*0.18})`);shadow.addColorStop(1,'rgba(140,175,210,0)');ctx.beginPath();ctx.arc(px,py+p.r*0.3,p.r*0.8,0,Math.PI*2);ctx.fillStyle=shadow;ctx.fill();const g=ctx.createRadialGradient(px-p.r*0.22,py-p.r*0.22,p.r*0.05,px,py,p.r);g.addColorStop(0,`rgba(255,255,255,${this.alpha})`);g.addColorStop(0.45,`rgba(${b},${b},${b},${this.alpha*0.88})`);g.addColorStop(0.75,`rgba(${b-10},${b},${b+5},${this.alpha*0.55})`);g.addColorStop(1,`rgba(${b-20},${b-10},${b+10},0)`);ctx.beginPath();ctx.arc(px,py,p.r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();const hl=ctx.createRadialGradient(px-p.r*0.3,py-p.r*0.3,0,px-p.r*0.3,py-p.r*0.3,p.r*0.6);hl.addColorStop(0,`rgba(255,255,255,${this.alpha*0.45})`);hl.addColorStop(1,'rgba(255,255,255,0)');ctx.beginPath();ctx.arc(px-p.r*0.3,py-p.r*0.3,p.r*0.6,0,Math.PI*2);ctx.fillStyle=hl;ctx.fill()});this.x-=this.speed;if(this.x<-this.baseR*3)this.spawn(false)}}class Bird{constructor(w,h){this.W=w;this.H=h;this.reset()}reset(){this.x=-40;this.y=this.H*(0.05+Math.random()*0.45);this.speed=0.5+Math.random()*0.8;this.size=3+Math.random()*4;this.flapT=Math.random()*Math.PI*2;this.flapS=0.06+Math.random()*0.06}draw(ctx,t){const flap=Math.sin(t*this.flapS+this.flapT)*this.size*0.6;ctx.save();ctx.translate(this.x,this.y);ctx.strokeStyle='rgba(30,60,110,0.5)';ctx.lineWidth=1.2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-this.size,-flap);ctx.quadraticCurveTo(0,flap*0.5,this.size,-flap);ctx.stroke();ctx.restore();this.x+=this.speed;if(this.x>this.W+60)this.reset()}}let clouds=[],birds=[];function initScene(){const w=fc.width,h=fc.height;clouds=[];birds=[];[5,6,4].forEach((count,depth)=>{for(let i=0;i<count;i++){const c=new Cloud(w,h,true);c.depth=depth;const scale=0.55+depth*0.35;c.baseR=(60+Math.random()*90)*scale;c.speed=(0.12+Math.random()*0.22)*(0.6+depth*0.4);clouds.push(c)}});for(let i=0;i<4;i++){const b=new Bird(w,h);b.x=Math.random()*w;birds.push(b)}}resizeFc();window.addEventListener('resize',resizeFc);let t=0;function drawFooter(){const fw=fc.width,fh=fc.height;fctx.clearRect(0,0,fw,fh);const sky=fctx.createLinearGradient(0,0,0,fh);sky.addColorStop(0,'#0a1e35');sky.addColorStop(0.30,'#0e3358');sky.addColorStop(0.65,'#1a5580');sky.addColorStop(0.85,'#1f6a96');sky.addColorStop(1,'#2a7aaa');fctx.fillStyle=sky;fctx.fillRect(0,0,fw,fh);const sunX=fw*0.82,sunY=fh*0.06;const sunG=fctx.createRadialGradient(sunX,sunY,0,sunX,sunY,fh*0.55);sunG.addColorStop(0,'rgba(255,220,120,0.18)');sunG.addColorStop(0.15,'rgba(255,200,80,0.09)');sunG.addColorStop(0.4,'rgba(255,180,40,0.04)');sunG.addColorStop(1,'rgba(255,160,0,0)');fctx.fillStyle=sunG;fctx.fillRect(0,0,fw,fh);[0,1,2].forEach(d=>clouds.filter(c=>c.depth===d).forEach(c=>c.draw(fctx,t)));birds.forEach(b=>b.draw(fctx,t));t++;requestAnimationFrame(drawFooter)}drawFooter()})();
+
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

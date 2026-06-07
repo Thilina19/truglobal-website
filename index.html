@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRU Global Recruitment & Consultants | New Zealand</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #FFD700;
+      --gold-light: #FFE55C;
+      --gold-dark: #B8860B;
+      --red: #CC0000;
+      --red-dark: #8B0000;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --dark2: #1a1a1a;
+      --text: #333333;
+      --text-light: #666666;
+      --white: #FFFFFF;
+      --gradient: linear-gradient(135deg, #FFD700 0%, #CC0000 100%);
+      --gradient-lr: linear-gradient(90deg, #FFD700 0%, #CC0000 100%);
+      --gradient-tb: linear-gradient(180deg, #FFD700 0%, #CC0000 100%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); overflow-x: hidden; }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      padding: 1rem 3rem; display: flex; align-items: center;
+      justify-content: space-between; transition: all 0.4s ease;
+      background: transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(10,10,10,0.96); backdrop-filter: blur(12px);
+      padding: 0.65rem 3rem;
+      box-shadow: 0 2px 30px rgba(0,0,0,0.4);
+      border-bottom: 1px solid rgba(255,215,0,0.08);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo-img { height: 72px; width: auto; background: white; padding: 5px 10px; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.3); transition: box-shadow 0.3s; }
+    .nav-logo-img:hover { box-shadow: 0 4px 20px rgba(255,215,0,0.4); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.3s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gradient-lr); transition: width 0.3s; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-wa {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: #25D366; color: #fff !important; padding: 0.5rem 1.1rem;
+      border-radius: 50px; font-weight: 700; font-size: 0.82rem;
+      text-decoration: none; transition: all 0.3s;
+      box-shadow: 0 3px 12px rgba(37,211,102,0.3);
+    }
+    .nav-wa:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+    .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 75% 50%, rgba(180,0,0,0.18) 0%, transparent 55%),
+                  radial-gradient(ellipse at 25% 60%, rgba(180,120,0,0.10) 0%, transparent 50%),
+                  linear-gradient(135deg, #080808 0%, #130202 50%, #0a0a0a 100%);
+      display: flex; align-items: center; position: relative; overflow: hidden;
+    }
+    .hero-particles { position: absolute; inset: 0; pointer-events: none; }
+    .hero-container {
+      max-width: 1300px; margin: 0 auto; padding: 7rem 3rem 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: center; width: 100%;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.35rem 1rem; background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.25); border-radius: 50px;
+      color: var(--gold); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .badge-dot { width: 7px; height: 7px; background: #25D366; border-radius: 50%; animation: blink 1.8s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+    .hero-title { font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.08; margin-bottom: 1.4rem; }
+    .hero-title .accent { display: block; background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.62); line-height: 1.85; margin-bottom: 2.5rem; max-width: 490px; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.9rem 1.9rem; background: #25D366; color: white;
+      border-radius: 10px; font-size: 0.98rem; font-weight: 700;
+      text-decoration: none; transition: all 0.35s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.32);
+    }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(37,211,102,0.5); }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.9rem 1.9rem; background: transparent; color: white;
+      border: 2px solid rgba(255,215,0,0.4); border-radius: 10px;
+      font-size: 0.98rem; font-weight: 600; text-decoration: none; transition: all 0.35s;
+    }
+    .btn-outline-white:hover { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+    #globeCanvas { width: 100%; max-width: 520px; height: 520px; display: block; }
+    .globe-glow {
+      position: absolute; width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(204,0,0,0.18) 0%, transparent 70%);
+      animation: glowPulse 4s ease-in-out infinite; pointer-events: none;
+    }
+    @keyframes glowPulse { 0%,100%{transform:scale(1);opacity:.9} 50%{transform:scale(1.12);opacity:.4} }
+    .scroll-cue {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      color: rgba(255,255,255,0.35); font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase; animation: scrollBounce 2.2s ease-in-out infinite;
+    }
+    @keyframes scrollBounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(9px)} }
+
+    /* ===== MARQUEE ===== */
+    .marquee-bar { background: var(--gradient-lr); padding: 0.7rem 0; overflow: hidden; position: relative; }
+    .marquee-track { display: flex; gap: 0; white-space: nowrap; animation: marqueeAnim 28s linear infinite; }
+    .marquee-item { display: inline-flex; align-items: center; gap: 0.6rem; color: white; font-size: 0.88rem; font-weight: 600; padding: 0 2.5rem; }
+    .marquee-item i { font-size: 0.9rem; opacity: 0.85; }
+    .marquee-sep { color: rgba(255,255,255,0.4); }
+    @keyframes marqueeAnim { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ===== STATS ===== */
+    #stats {
+      background: linear-gradient(135deg, #0f0f0f 0%, #180000 100%);
+      padding: 4rem 3rem; position: relative; overflow: hidden;
+    }
+    #stats::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gradient-lr); opacity: 0.04;
+    }
+    .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+    .stat-card {
+      text-align: center; padding: 2rem 1.5rem;
+      border: 1px solid rgba(255,215,0,0.12); border-radius: 18px;
+      background: rgba(255,255,255,0.02); transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-lr); }
+    .stat-card:hover { transform: translateY(-5px); border-color: rgba(255,215,0,0.28); background: rgba(255,255,255,0.04); }
+    .stat-icon { font-size: 1.8rem; margin-bottom: 0.75rem; background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-num { font-size: 2.4rem; font-weight: 900; color: white; line-height: 1; }
+    .stat-num .grad { background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-lbl { color: rgba(255,255,255,0.55); font-size: 0.88rem; margin-top: 0.4rem; font-weight: 500; }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: 5.5rem 3rem; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .sec-tag {
+      display: inline-block; padding: 0.3rem 1rem;
+      background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25);
+      color: var(--gold-dark); font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 0.15em; text-transform: uppercase; border-radius: 50px; margin-bottom: 0.9rem;
+    }
+    .sec-title { font-size: clamp(1.7rem,3.2vw,2.65rem); font-weight: 900; color: var(--black); margin-bottom: 0.9rem; line-height: 1.18; }
+    .sec-title .grad { background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .sec-divider { width: 70px; height: 4px; background: var(--gradient-lr); margin: 0.8rem auto 1rem; border-radius: 2px; }
+    .sec-desc { max-width: 580px; margin: 0 auto; color: var(--text-light); font-size: 1rem; line-height: 1.85; }
+
+    /* ===== ABOUT ===== */
+    #about { background: #f7f7f7; }
+    .about-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img { width: 100%; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,0.13); display: block; }
+    .about-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--gradient-lr); color: white; padding: 1.4rem 1.8rem;
+      border-radius: 16px; box-shadow: 0 10px 30px rgba(204,0,0,0.3); text-align: center;
+    }
+    .about-badge .big { font-size: 2rem; font-weight: 900; display: block; line-height: 1; }
+    .about-badge .small { font-size: 0.75rem; opacity: 0.9; margin-top: 0.2rem; }
+    .about-content h2 { font-size: 2rem; font-weight: 900; color: var(--black); margin-bottom: 1.3rem; line-height: 1.3; }
+    .about-content p { color: var(--text-light); line-height: 1.9; margin-bottom: 1.3rem; font-size: 0.97rem; }
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1.8rem 0; }
+    .feat-item { display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .feat-item i { color: var(--red); font-size: 1rem; }
+    .countries-row { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e8e8e8; }
+    .countries-label { font-size: 0.8rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .country-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .cpill { padding: 0.28rem 0.8rem; background: white; border: 1px solid #ddd; border-radius: 50px; font-size: 0.8rem; font-weight: 600; color: var(--text); box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.88rem 1.9rem; background: var(--gradient-lr); color: white;
+      border-radius: 10px; font-size: 0.97rem; font-weight: 700;
+      text-decoration: none; transition: all 0.35s; margin-top: 1.5rem;
+      box-shadow: 0 4px 20px rgba(204,0,0,0.25);
+    }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(204,0,0,0.4); }
+
+    /* ===== SERVICES ===== */
+    #services { background: white; }
+    .svcs-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+    .svc-card {
+      padding: 2.25rem 1.9rem; border-radius: 18px; border: 1px solid #ededed;
+      background: white; transition: all 0.4s; position: relative; overflow: hidden; cursor: default;
+    }
+    .svc-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+      background: var(--gradient-lr); transform: scaleX(0); transition: transform 0.4s;
+    }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-card:hover { transform: translateY(-9px); box-shadow: 0 20px 55px rgba(0,0,0,0.09); border-color: transparent; }
+    .svc-icon {
+      width: 62px; height: 62px; border-radius: 15px;
+      background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(204,0,0,0.09));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; margin-bottom: 1.4rem; transition: all 0.35s;
+    }
+    .svc-icon i { background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .svc-card:hover .svc-icon { background: var(--gradient-lr); }
+    .svc-card:hover .svc-icon i { background: none; -webkit-text-fill-color: white; color: white; }
+    .svc-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--black); margin-bottom: 0.7rem; }
+    .svc-card p { color: var(--text-light); font-size: 0.88rem; line-height: 1.75; }
+    .svc-link { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 1.2rem; color: var(--red); font-weight: 700; font-size: 0.83rem; text-decoration: none; transition: gap 0.3s; }
+    .svc-link:hover { gap: 0.7rem; }
+
+    /* ===== WHY US ===== */
+    #why {
+      background: linear-gradient(135deg, #080808 0%, #160000 50%, #0c0c0c 100%);
+      color: white;
+    }
+    #why .sec-tag { background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.25); color: var(--gold); }
+    #why .sec-title { color: white; }
+    #why .sec-desc { color: rgba(255,255,255,0.55); }
+    .why-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .why-list { display: flex; flex-direction: column; gap: 1.3rem; }
+    .why-item {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.4rem 1.5rem; background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; transition: all 0.35s;
+    }
+    .why-item:hover { background: rgba(255,215,0,0.05); border-color: rgba(255,215,0,0.18); transform: translateX(8px); }
+    .why-icon {
+      width: 46px; height: 46px; min-width: 46px; background: var(--gradient-lr);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: white;
+    }
+    .why-item h4 { font-size: 0.98rem; font-weight: 800; color: white; margin-bottom: 0.3rem; }
+    .why-item p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+    .why-visual { position: relative; }
+    .why-visual img { width: 100%; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); display: block; }
+    .float-card {
+      position: absolute; background: white; border-radius: 14px;
+      padding: 1rem 1.5rem; box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+    }
+    .float-card.fc1 { top: -1.5rem; left: -1.5rem; animation: float1 3s ease-in-out infinite; }
+    .float-card.fc2 { bottom: -1.5rem; right: -1.5rem; animation: float1 3s ease-in-out infinite 1.5s; }
+    @keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .fc-label { font-size: 0.72rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; }
+    .fc-value { font-size: 1.5rem; font-weight: 900; background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: #f5f5f5; }
+    .testi-wrap { max-width: 1180px; margin: 0 auto; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+    .testi-card {
+      background: white; border-radius: 18px; padding: 1.9rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #eee; transition: all 0.3s;
+    }
+    .testi-card:hover { transform: translateY(-5px); box-shadow: 0 14px 45px rgba(0,0,0,0.1); }
+    .testi-stars { color: var(--gold); font-size: 1rem; margin-bottom: 0.9rem; letter-spacing: 0.1em; }
+    .testi-text { color: var(--text); font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.4rem; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+    .testi-av {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--gradient-lr); display: flex; align-items: center;
+      justify-content: center; color: white; font-weight: 800; font-size: 1.1rem;
+    }
+    .testi-name { font-weight: 800; font-size: 0.92rem; color: var(--black); }
+    .testi-role { font-size: 0.78rem; color: var(--text-light); }
+
+    /* ===== COUNTRIES ===== */
+    #countries { background: white; }
+    .cty-grid { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .cty-card {
+      padding: 1.2rem 1.6rem; background: white; border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07); border: 2px solid transparent;
+      text-align: center; transition: all 0.35s; cursor: default; position: relative;
+    }
+    .cty-card::before {
+      content: ''; position: absolute; inset: -2px; border-radius: 16px;
+      background: var(--gradient-lr); z-index: -1; opacity: 0; transition: opacity 0.35s;
+    }
+    .cty-card:hover::before { opacity: 1; }
+    .cty-card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(204,0,0,0.2); }
+    .cty-flag { font-size: 2.2rem; display: block; margin-bottom: 0.4rem; }
+    .cty-name { font-weight: 800; font-size: 0.88rem; color: var(--black); }
+
+    /* ===== TEAM ===== */
+    #team { background: #f7f7f7; }
+    .team-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .team-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; transition: all 0.35s; }
+    .team-card:hover { transform: translateY(-9px); box-shadow: 0 20px 55px rgba(0,0,0,0.12); }
+    .team-img { position: relative; height: 270px; overflow: hidden; background: linear-gradient(135deg, #f0f0f0, #e0e0e0); }
+    .team-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .team-overlay {
+      position: absolute; inset: 0; background: var(--gradient); opacity: 0;
+      transition: opacity 0.35s; display: flex; align-items: center; justify-content: center; gap: 1rem;
+    }
+    .team-card:hover .team-overlay { opacity: 0.88; }
+    .tsoc {
+      width: 42px; height: 42px; background: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red); font-size: 1rem; text-decoration: none; transition: transform 0.2s;
+    }
+    .tsoc:hover { transform: scale(1.1); }
+    .team-info { padding: 1.4rem; text-align: center; }
+    .team-info h3 { font-size: 1.05rem; font-weight: 800; color: var(--black); margin-bottom: 0.2rem; }
+    .team-info .role { font-size: 0.82rem; margin-bottom: 0.6rem; }
+    .team-info .role span { background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; }
+    .team-info .bio { font-size: 0.8rem; color: var(--text-light); line-height: 1.6; }
+
+    /* ===== JOBS ===== */
+    #jobs { background: white; }
+    .jobs-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .job-card {
+      background: white; border-radius: 16px; padding: 1.7rem;
+      border: 1px solid #ededed; transition: all 0.35s; position: relative; overflow: hidden;
+    }
+    .job-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-lr); transform: scaleX(0); transition: transform 0.35s; }
+    .job-card:hover::before { transform: scaleX(1); }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 14px 45px rgba(0,0,0,0.1); }
+    .job-tag { display: inline-block; padding: 0.22rem 0.75rem; background: rgba(255,215,0,0.1); color: var(--gold-dark); border-radius: 50px; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.9rem; }
+    .job-card h3 { font-size: 1rem; font-weight: 800; color: var(--black); margin-bottom: 0.7rem; }
+    .job-meta { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-bottom: 1rem; }
+    .jm { display: flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; color: var(--text-light); }
+    .jm i { color: var(--red); font-size: 0.72rem; }
+    .btn-apply {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.58rem 1.2rem; background: var(--gradient-lr); color: white;
+      border-radius: 8px; font-size: 0.83rem; font-weight: 700; text-decoration: none; transition: all 0.3s;
+    }
+    .btn-apply:hover { transform: translateX(3px); box-shadow: 0 5px 18px rgba(204,0,0,0.3); }
+    .jobs-cta { text-align: center; margin-top: 3rem; }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: linear-gradient(135deg, #080808 0%, #180000 50%, #0d0d0d 100%);
+      color: white;
+      padding-bottom: 10rem;
+    }
+    #contact .sec-tag { background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.25); color: var(--gold); }
+    #contact .sec-title { color: white; }
+    #contact .sec-desc { color: rgba(255,255,255,0.55); }
+    .contact-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
+    .c-info h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 2rem; color: white; }
+    .c-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+    .c-icon {
+      width: 46px; height: 46px; min-width: 46px; background: var(--gradient-lr);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: white;
+    }
+    .c-text h4 { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+    .c-text p, .c-text a { color: rgba(255,255,255,0.9); font-size: 0.97rem; font-weight: 500; text-decoration: none; transition: color 0.3s; line-height: 1.7; }
+    .c-text a:hover { color: var(--gold); }
+    .wa-box {
+      margin-top: 2rem; padding: 1.5rem 1.8rem;
+      background: rgba(37,211,102,0.08); border: 2px solid rgba(37,211,102,0.4);
+      border-radius: 18px;
+    }
+    .wa-box h4 { font-size: 1rem; font-weight: 800; color: #25D366; margin-bottom: 0.4rem; }
+    .wa-box p { font-size: 0.83rem; color: rgba(255,255,255,0.55); margin-bottom: 1rem; }
+    .btn-wa-big {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      padding: 0.88rem 1.8rem; background: #25D366; color: white;
+      border-radius: 12px; font-weight: 800; font-size: 0.97rem;
+      text-decoration: none; transition: all 0.35s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.28);
+    }
+    .btn-wa-big:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+    .c-form {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px; padding: 2.4rem;
+    }
+    .c-form h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+    .fg { margin-bottom: 1.2rem; }
+    .fg label { display: block; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 0.45rem; }
+    .fg input, .fg textarea, .fg select {
+      width: 100%; padding: 0.85rem 1.15rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; color: white; font-size: 0.92rem;
+      font-family: 'Inter', sans-serif; transition: border-color 0.3s; outline: none;
+    }
+    .fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--gold); }
+    .fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .fg textarea { min-height: 110px; resize: vertical; }
+    .fg select option { background: #1a1a1a; color: white; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-submit {
+      width: 100%; padding: 1rem; background: var(--gradient-lr); color: white;
+      border: none; border-radius: 12px; font-size: 0.98rem; font-weight: 800;
+      cursor: pointer; transition: all 0.35s; font-family: 'Inter', sans-serif; letter-spacing: 0.02em;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(204,0,0,0.4); }
+
+    /* ===== FOOTER ===== */
+    #footer { background: #0d2f4a; color: white; position: relative; overflow: hidden; margin-top: -1px; }
+    #footerGlobe { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .footer-inner { position: relative; z-index: 5; }
+    .footer-main {
+      max-width: 1180px; margin: 0 auto; padding: 5rem 3rem 3rem;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem;
+    }
+    .fb-logo { display: flex; align-items: center; margin-bottom: 1.2rem; }
+    .fb-logo-img { height: 80px; width: auto; background: white; padding: 5px 10px; border-radius: 8px; }
+    .fb-desc { font-size: 0.88rem; color: rgba(255,255,255,0.88); line-height: 1.8; margin-bottom: 1.5rem; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+    .fb-social { display: flex; gap: 0.65rem; }
+    .fs-btn {
+      width: 38px; height: 38px; border-radius: 9px;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; transition: all 0.3s;
+    }
+    .fs-btn:hover { background: var(--gradient-lr); border-color: transparent; color: white; transform: translateY(-3px); }
+    .fc h4 {
+      font-size: 0.82rem; font-weight: 900; color: #fff; text-transform: uppercase;
+      letter-spacing: 0.12em; margin-bottom: 1.4rem; position: relative; padding-bottom: 0.7rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+    }
+    .fc h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 28px; height: 2px; background: var(--gradient-lr); }
+    .fc ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .fc ul a { color: rgba(255,255,255,0.88); text-decoration: none; font-size: 0.88rem; transition: color 0.3s; display: flex; align-items: center; gap: 0.45rem; font-weight: 500; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
+    .fc ul a i { font-size: 0.65rem; }
+    .fc ul a:hover { color: var(--gold); }
+    .footer-bottom {
+      position: relative; z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding: 1.4rem 3rem; max-width: 1180px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.82rem; color: rgba(255,255,255,0.85);
+      background: rgba(5,15,35,0.55);
+      backdrop-filter: blur(6px);
+    }
+    .footer-bottom a { color: var(--gold); text-decoration: none; font-weight: 700; }
+
+    /* ===== WA FLOAT ===== */
+    .wa-float {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 58px; height: 58px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.75rem; color: white; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      z-index: 9999; transition: transform 0.3s;
+      animation: waPop 2.5s ease-in-out infinite;
+    }
+    .wa-float:hover { transform: scale(1.12); }
+    @keyframes waPop {
+      0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.45)}
+      50%{box-shadow:0 4px 40px rgba(37,211,102,0.7),0 0 0 12px rgba(37,211,102,0.08)}
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+    .reveal-l { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-l.on { opacity: 1; transform: translateX(0); }
+    .reveal-r { opacity: 0; transform: translateX(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-r.on { opacity: 1; transform: translateX(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .svcs-grid { grid-template-columns: repeat(2,1fr); }
+      .team-grid { grid-template-columns: repeat(2,1fr); }
+      .jobs-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: #0d0d0d; padding: 5rem 2rem 2rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; z-index: 999; transform: translateX(100%); transition: transform 0.4s; }
+      .nav-links.open { transform: translateX(0); }
+      .navbar { padding: 1rem 1.5rem; }
+      .navbar.scrolled { padding: 0.65rem 1.5rem; }
+      .hero-container { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2rem; }
+      .hero-visual { display: none; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-badge { position: relative; bottom: auto; right: auto; margin-top: 1rem; display: inline-block; }
+      .why-visual { display: none; }
+      .svcs-grid, .team-grid, .jobs-grid, .testi-grid { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.2rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/642902010404" target="_blank" class="wa-float" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRU Global Recruitment & Consultants" class="nav-logo-img">
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/642902010404" target="_blank" class="nav-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+    </ul>
+
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ======================== HERO ======================== -->
+  <section id="hero">
+    <canvas class="hero-particles" id="heroParticles"></canvas>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          New Zealand's Pioneer Recruitment Firm
+        </div>
+        <h1 class="hero-title">
+          Connecting
+          <span class="accent">Global Talent</span>
+          With Opportunity
+        </h1>
+        <p class="hero-sub">
+          TRU Global Recruitment &amp; Consultants — your trusted partner for talent acquisition,
+          HR consulting, and career development across NZ, Australia, Sri Lanka, UAE, Qatar, Oman &amp; Canada.
+        </p>
+        <div class="hero-btns">
+          <a href="https://wa.me/642902010404" target="_blank" class="btn-wa">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+          <a href="#services" class="btn-outline-white">
+            Our Services <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="globe-glow"></div>
+        <canvas id="globeCanvas"></canvas>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <div class="marquee-item"><i class="fas fa-star"></i> 5.0 Rating — 110+ Reviews</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-globe-asia"></i> 7+ Countries Served</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-users"></i> 150+ Successful Placements</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-headset"></i> 24/7 Online Support</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-briefcase"></i> Talent Acquisition Experts</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-certificate"></i> Trusted NZ Recruiters</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="marquee-item"><i class="fas fa-star"></i> 5.0 Rating — 110+ Reviews</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-globe-asia"></i> 7+ Countries Served</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-users"></i> 150+ Successful Placements</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-headset"></i> 24/7 Online Support</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-briefcase"></i> Talent Acquisition Experts</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+      <div class="marquee-item"><i class="fas fa-certificate"></i> Trusted NZ Recruiters</div>
+      <div class="marquee-item"><span class="marquee-sep">•</span></div>
+    </div>
+  </div>
+
+  <!-- ======================== STATS ======================== -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat-card reveal delay-1">
+        <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+        <div class="stat-num"><span class="grad"><span class="counter" data-target="150">0</span>+</span></div>
+        <div class="stat-lbl">Students &amp; Candidates Served</div>
+      </div>
+      <div class="stat-card reveal delay-2">
+        <div class="stat-icon"><i class="fas fa-star"></i></div>
+        <div class="stat-num"><span class="grad">5.0</span></div>
+        <div class="stat-lbl">Star Rating — 110+ Reviews</div>
+      </div>
+      <div class="stat-card reveal delay-3">
+        <div class="stat-icon"><i class="fas fa-globe-asia"></i></div>
+        <div class="stat-num"><span class="grad"><span class="counter" data-target="7">0</span>+</span></div>
+        <div class="stat-lbl">Countries Represented</div>
+      </div>
+      <div class="stat-card reveal delay-4">
+        <div class="stat-icon"><i class="fas fa-headset"></i></div>
+        <div class="stat-num"><span class="grad">24/7</span></div>
+        <div class="stat-lbl">Online Support Available</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== ABOUT ======================== -->
+  <section id="about">
+    <div class="section-header">
+      <div class="sec-tag">About TRU Global</div>
+      <h2 class="sec-title">A Pioneer <span class="grad">Recruitment Firm</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">Connecting exceptional talent with extraordinary opportunities across borders since our founding in New Zealand.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-l">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=85" alt="TRU Global Professional Team" loading="lazy">
+        <div class="about-badge">
+          <span class="big">7+</span>
+          <span class="small">Countries Served</span>
+        </div>
+      </div>
+      <div class="about-content reveal-r">
+        <h2>Your Trusted Global Recruitment Partner</h2>
+        <p>TRU Global Recruitment &amp; Consultants is a pioneer recruitment firm services provider based in New Zealand, with a strong international presence across Sri Lanka, Australia, Qatar, UAE, Oman, and Canada.</p>
+        <p>Our team of experienced professionals delivers comprehensive HR solutions — from strategic talent acquisition to career coaching — ensuring both employers and candidates achieve their goals with confidence.</p>
+        <div class="feat-grid">
+          <div class="feat-item"><i class="fas fa-check-circle"></i> Expert Talent Sourcing</div>
+          <div class="feat-item"><i class="fas fa-check-circle"></i> Global Network</div>
+          <div class="feat-item"><i class="fas fa-check-circle"></i> HR Consulting</div>
+          <div class="feat-item"><i class="fas fa-check-circle"></i> Career Coaching</div>
+          <div class="feat-item"><i class="fas fa-check-circle"></i> Background Verification</div>
+          <div class="feat-item"><i class="fas fa-check-circle"></i> 24/7 Support</div>
+        </div>
+        <div class="countries-row">
+          <div class="countries-label">Operating In</div>
+          <div class="country-pills">
+            <span class="cpill">🇳🇿 New Zealand</span>
+            <span class="cpill">🇱🇰 Sri Lanka</span>
+            <span class="cpill">🇦🇺 Australia</span>
+            <span class="cpill">🇶🇦 Qatar</span>
+            <span class="cpill">🇦🇪 UAE</span>
+            <span class="cpill">🇴🇲 Oman</span>
+            <span class="cpill">🇨🇦 Canada</span>
+          </div>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="btn-gold">
+          <i class="fab fa-whatsapp"></i> Talk To Us Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SERVICES ======================== -->
+  <section id="services">
+    <div class="section-header">
+      <div class="sec-tag">What We Offer</div>
+      <h2 class="sec-title">Our <span class="grad">Professional Services</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">Comprehensive HR and recruitment solutions tailored to your organizational needs.</p>
+    </div>
+    <div class="svcs-grid">
+      <div class="svc-card reveal delay-1">
+        <div class="svc-icon"><i class="fas fa-search"></i></div>
+        <h3>Talent Acquisition</h3>
+        <p>Build your competitive advantage through strategic sourcing. We identify and attract top-tier candidates aligned with your organizational goals and culture.</p>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Get Started <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="svc-card reveal delay-2">
+        <div class="svc-icon"><i class="fas fa-building"></i></div>
+        <h3>HR Outsourcing</h3>
+        <p>Improve efficiency and reduce costs with our comprehensive HR outsourcing solutions. Let us handle your HR functions while you focus on core business growth.</p>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="svc-card reveal delay-3">
+        <div class="svc-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>HR Consulting Services</h3>
+        <p>Build a high-performing business with expert HR consulting. We provide strategic advice to optimize your human capital and organizational effectiveness.</p>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Discover More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="svc-card reveal delay-1">
+        <div class="svc-icon"><i class="fas fa-file-alt"></i></div>
+        <h3>CV &amp; Interview Preparation</h3>
+        <p>Stand out from the competition with our comprehensive CV development and interview coaching services tailored to your target role and industry.</p>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="svc-card reveal delay-2">
+        <div class="svc-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Background Verification</h3>
+        <p>Hire with confidence through thorough reference checks and background verification services, ensuring informed hiring decisions every time.</p>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="svc-card reveal delay-3">
+        <div class="svc-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Professional Development &amp; Assessment</h3>
+        <p>Unlock your team's potential with our organizational development and professional assessment programs designed to drive performance and growth.</p>
+        <a href="https://wa.me/642902010404" target="_blank" class="svc-link">Explore <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== WHY US ======================== -->
+  <section id="why">
+    <div class="section-header">
+      <div class="sec-tag">Why TRU Global</div>
+      <h2 class="sec-title">Why <span class="grad">Choose Us</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">We bring expertise, dedication, and a global network to every recruitment engagement.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-list reveal-l">
+        <div class="why-item">
+          <div class="why-icon"><i class="fas fa-globe"></i></div>
+          <div>
+            <h4>Global Reach, Local Expertise</h4>
+            <p>Operating across 7+ countries with deep knowledge of local markets including NZ, Australia, UAE, and Sri Lanka.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><i class="fas fa-star"></i></div>
+          <div>
+            <h4>5.0 Star Rated Service</h4>
+            <p>Consistently rated 5.0 stars by 110+ clients for our meticulous screening and exceptional recruitment service.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <h4>24/7 Dedicated Support</h4>
+            <p>Round-the-clock online support ensuring you're never alone in your recruitment or career journey.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><i class="fas fa-handshake"></i></div>
+          <div>
+            <h4>Personalized Approach</h4>
+            <p>Customized recruitment strategies tailored to your specific industry, culture, and organizational requirements.</p>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual reveal-r">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=650&q=85" alt="Professional Team Meeting" loading="lazy">
+        <div class="float-card fc1">
+          <div class="fc-label">Client Success Rate</div>
+          <div class="fc-value">98%</div>
+        </div>
+        <div class="float-card fc2">
+          <div class="fc-label">Years of Experience</div>
+          <div class="fc-value">5+</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== COUNTRIES ======================== -->
+  <section id="countries">
+    <div class="section-header">
+      <div class="sec-tag">Global Presence</div>
+      <h2 class="sec-title">Countries <span class="grad">We Serve</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">Our recruitment network spans across 7+ countries, bridging talent and opportunity worldwide.</p>
+    </div>
+    <div class="cty-grid reveal">
+      <div class="cty-card"><span class="cty-flag">🇳🇿</span><div class="cty-name">New Zealand</div></div>
+      <div class="cty-card"><span class="cty-flag">🇱🇰</span><div class="cty-name">Sri Lanka</div></div>
+      <div class="cty-card"><span class="cty-flag">🇦🇺</span><div class="cty-name">Australia</div></div>
+      <div class="cty-card"><span class="cty-flag">🇶🇦</span><div class="cty-name">Qatar</div></div>
+      <div class="cty-card"><span class="cty-flag">🇦🇪</span><div class="cty-name">UAE</div></div>
+      <div class="cty-card"><span class="cty-flag">🇴🇲</span><div class="cty-name">Oman</div></div>
+      <div class="cty-card"><span class="cty-flag">🇨🇦</span><div class="cty-name">Canada</div></div>
+    </div>
+  </section>
+
+  <!-- ======================== TESTIMONIALS ======================== -->
+  <section id="testimonials">
+    <div class="section-header">
+      <div class="sec-tag">Client Stories</div>
+      <h2 class="sec-title">What Our <span class="grad">Clients Say</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">Hear from professionals and organizations who've experienced TRU Global's exceptional service.</p>
+    </div>
+    <div class="testi-wrap">
+      <div class="testi-grid">
+        <div class="testi-card reveal delay-1">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"TRU Global's meticulous screening process and exceptional service helped us find the perfect Operations Manager. Their global network is truly impressive — highly recommend!"</p>
+          <div class="testi-author">
+            <div class="testi-av">J</div>
+            <div>
+              <div class="testi-name">James Henderson</div>
+              <div class="testi-role">CEO, Auckland Enterprise</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal delay-2">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"As an HR Executive, I've worked with many firms. TRU Global stands apart for their professionalism and deep understanding of industry requirements. Exceptional experience."</p>
+          <div class="testi-author">
+            <div class="testi-av">S</div>
+            <div>
+              <div class="testi-name">Sarah Mitchell</div>
+              <div class="testi-role">HR Executive, Wellington Corp</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal delay-3">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The CV preparation and coaching service was truly transformative. I secured my Regional Manager role within weeks. TRU Global's guidance made all the difference!"</p>
+          <div class="testi-author">
+            <div class="testi-av">R</div>
+            <div>
+              <div class="testi-name">Rahul Perera</div>
+              <div class="testi-role">Regional Manager, Dubai UAE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== TEAM ======================== -->
+  <section id="team">
+    <div class="section-header">
+      <div class="sec-tag">Our Leadership</div>
+      <h2 class="sec-title">Meet Our <span class="grad">Expert Team</span></h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal delay-1">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=85" alt="Mr. Upul Chandima - Director" loading="lazy">
+          <div class="team-overlay">
+            <a href="https://wa.me/642902010404" target="_blank" class="tsoc"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="tsoc"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="team-info">
+          <h3>Mr. Upul Chandima</h3>
+          <div class="role"><span>Founder &amp; Director</span></div>
+          <p class="bio">Management Coach · Career Coach · Marketing Coach</p>
+        </div>
+      </div>
+      <div class="team-card reveal delay-2">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=85" alt="Senior Career Consultant" loading="lazy">
+          <div class="team-overlay">
+            <a href="https://wa.me/642902010404" target="_blank" class="tsoc"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="tsoc"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="team-info">
+          <h3>Career Consultant</h3>
+          <div class="role"><span>Senior Career Coach</span></div>
+          <p class="bio">CV Preparation · Interview Coaching · Career Planning</p>
+        </div>
+      </div>
+      <div class="team-card reveal delay-3">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=85" alt="Business Development Manager" loading="lazy">
+          <div class="team-overlay">
+            <a href="https://wa.me/642902010404" target="_blank" class="tsoc"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="tsoc"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="team-info">
+          <h3>Marketing Coach</h3>
+          <div class="role"><span>Business Development</span></div>
+          <p class="bio">Brand Strategy · Client Relations · Growth Marketing</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== JOBS ======================== -->
+  <section id="jobs">
+    <div class="section-header">
+      <div class="sec-tag">Current Vacancies</div>
+      <h2 class="sec-title">Latest <span class="grad">Job Opportunities</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">Explore exciting career opportunities across our global network of trusted employers.</p>
+    </div>
+    <div class="jobs-grid">
+      <div class="job-card reveal delay-1">
+        <span class="job-tag">Full Time</span>
+        <h3>Senior HR Manager</h3>
+        <div class="job-meta">
+          <span class="jm"><i class="fas fa-map-marker-alt"></i> Auckland, NZ</span>
+          <span class="jm"><i class="fas fa-dollar-sign"></i> Competitive</span>
+          <span class="jm"><i class="fas fa-briefcase"></i> 5+ yrs exp.</span>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="btn-apply">Apply via WhatsApp <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="job-card reveal delay-2">
+        <span class="job-tag">Full Time</span>
+        <h3>Operations Manager</h3>
+        <div class="job-meta">
+          <span class="jm"><i class="fas fa-map-marker-alt"></i> Dubai, UAE</span>
+          <span class="jm"><i class="fas fa-dollar-sign"></i> Competitive</span>
+          <span class="jm"><i class="fas fa-briefcase"></i> 7+ yrs exp.</span>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="btn-apply">Apply via WhatsApp <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="job-card reveal delay-3">
+        <span class="job-tag">Contract</span>
+        <h3>IT Recruitment Specialist</h3>
+        <div class="job-meta">
+          <span class="jm"><i class="fas fa-map-marker-alt"></i> Sydney, AU</span>
+          <span class="jm"><i class="fas fa-dollar-sign"></i> Competitive</span>
+          <span class="jm"><i class="fas fa-briefcase"></i> 3+ yrs exp.</span>
+        </div>
+        <a href="https://wa.me/642902010404" target="_blank" class="btn-apply">Apply via WhatsApp <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="jobs-cta">
+      <a href="https://wa.me/642902010404" target="_blank" class="btn-gold">
+        <i class="fab fa-whatsapp"></i> Browse All Jobs on WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================== CONTACT ======================== -->
+  <section id="contact">
+    <div class="section-header">
+      <div class="sec-tag">Get In Touch</div>
+      <h2 class="sec-title">Contact <span class="grad">TRU Global</span></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">Ready to find your next great hire or take the next step in your career? We're here to help.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="c-info reveal-l">
+        <h3>Let's Start a Conversation</h3>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="c-text">
+            <h4>Address</h4>
+            <p>253 Dairy Flat Highway, Albany<br>Auckland, New Zealand</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-phone"></i></div>
+          <div class="c-text">
+            <h4>Phone</h4>
+            <a href="tel:+6429139012">+64 29 139 0012</a><br>
+            <a href="tel:+6429020 10404">+64 29 020 10404</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-envelope"></i></div>
+          <div class="c-text">
+            <h4>Email</h4>
+            <a href="mailto:contact@truglobalrec.co.nz">contact@truglobalrec.co.nz</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-clock"></i></div>
+          <div class="c-text">
+            <h4>Business Hours</h4>
+            <p>9:00 AM – 5:00 PM, Monday – Saturday</p>
+          </div>
+        </div>
+        <div class="wa-box">
+          <h4><i class="fab fa-whatsapp"></i>&nbsp; Instant WhatsApp Connect</h4>
+          <p>Get fast responses about jobs, services, or appointments — message us now.</p>
+          <a href="https://wa.me/642902010404?text=Hello TRU Global! I'd like to enquire about your services." target="_blank" class="btn-wa-big">
+            <i class="fab fa-whatsapp"></i> +64 29 020 10404
+          </a>
+        </div>
+      </div>
+
+      <div class="c-form reveal-r">
+        <h3>Make an Appointment</h3>
+        <form onsubmit="handleForm(event)">
+          <div class="form-row">
+            <div class="fg">
+              <label>First Name</label>
+              <input type="text" placeholder="John" required>
+            </div>
+            <div class="fg">
+              <label>Last Name</label>
+              <input type="text" placeholder="Doe" required>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com" required>
+          </div>
+          <div class="fg">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+64 XX XXX XXXX">
+          </div>
+          <div class="fg">
+            <label>Service Interested In</label>
+            <select>
+              <option value="">Select a Service</option>
+              <option>Talent Acquisition</option>
+              <option>HR Outsourcing</option>
+              <option>HR Consulting Services</option>
+              <option>CV &amp; Interview Preparation</option>
+              <option>Background Verification</option>
+              <option>Professional Development &amp; Assessment</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Your Message</label>
+            <textarea placeholder="Tell us about your requirements..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message &nbsp;<i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer id="footer">
+    <canvas id="footerGlobe"></canvas>
+    <div class="footer-inner">
+      <div class="footer-main">
+        <div>
+          <div class="fb-logo">
+            <img src="logo.png" alt="TRU Global" class="fb-logo-img">
+          </div>
+          <p class="fb-desc">New Zealand's pioneer recruitment firm — connecting global talent with extraordinary opportunities across 7+ countries. Your success is our mission.</p>
+          <div class="fb-social">
+            <a href="#" class="fs-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="fs-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/642902010404" target="_blank" class="fs-btn"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="fc">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+            <li><a href="jobs.html"><i class="fas fa-chevron-right"></i> Jobs</a></li>
+            <li><a href="news.html"><i class="fas fa-chevron-right"></i> News</a></li>
+            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div class="fc">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services"><i class="fas fa-chevron-right"></i> Talent Acquisition</a></li>
+            <li><a href="#services"><i class="fas fa-chevron-right"></i> HR Outsourcing</a></li>
+            <li><a href="#services"><i class="fas fa-chevron-right"></i> HR Consulting</a></li>
+            <li><a href="#services"><i class="fas fa-chevron-right"></i> CV Preparation</a></li>
+            <li><a href="#services"><i class="fas fa-chevron-right"></i> Background Check</a></li>
+            <li><a href="#services"><i class="fas fa-chevron-right"></i> Prof. Development</a></li>
+          </ul>
+        </div>
+        <div class="fc">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+6429139012"><i class="fas fa-phone"></i> +64 29 139 0012</a></li>
+            <li><a href="https://wa.me/642902010404" target="_blank"><i class="fab fa-whatsapp"></i> +64 29 020 10404</a></li>
+            <li><a href="mailto:contact@truglobalrec.co.nz"><i class="fas fa-envelope"></i> contact@truglobalrec.co.nz</a></li>
+            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Albany, Auckland NZ</a></li>
+            <li><a href="#"><i class="fas fa-clock"></i> Mon–Sat: 9AM–5PM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TRU Global Recruitment &amp; Consultants. All rights reserved.</p>
+        <p><a href="https://truglobalrec.co.nz" target="_blank">truglobalrec.co.nz</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // ===================== NAVBAR =====================
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Close mobile nav on link click
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // ===================== HERO GLOBE =====================
+  (function() {
+    const canvas = document.getElementById('globeCanvas');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let rot = 0, planeA = 0;
+
+    function draw() {
+      const W = canvas.width / dpr;
+      const H = canvas.height / dpr;
+      const cx = W / 2, cy = H / 2;
+      const R = Math.min(W, H) * 0.38;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Outer glow
+      const outerGlow = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.4);
+      outerGlow.addColorStop(0, 'rgba(200,0,0,0.12)');
+      outerGlow.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(cx, cy, R * 1.4, 0, Math.PI * 2);
+      ctx.fillStyle = outerGlow; ctx.fill();
+
+      // Latitude rings (ellipses)
+      for (let lat = -70; lat <= 70; lat += 20) {
+        const phi = lat * Math.PI / 180;
+        const ry = R * Math.cos(phi);
+        const py = cy - R * Math.sin(phi);
+        const t = (lat + 70) / 140;
+        const r = Math.round(255 * (1 - t) + 180 * t);
+        const g = Math.round(210 * (1 - t));
+        ctx.beginPath();
+        ctx.ellipse(cx, py, ry, ry * 0.18, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${r},${g},0, 0.22)`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+
+      // Longitude lines
+      for (let lon = 0; lon < 360; lon += 20) {
+        const theta = (lon + rot) * Math.PI / 180;
+        const cosT = Math.cos(theta);
+        const t = lon / 360;
+        const r = Math.round(255 * (1 - t) + 160 * t);
+        const g = Math.round(200 * (1 - t));
+        const alpha = cosT > 0 ? 0.45 : 0.08;
+        ctx.beginPath();
+        for (let lat2 = -90; lat2 <= 90; lat2 += 3) {
+          const phi = lat2 * Math.PI / 180;
+          const x = cx + R * Math.cos(phi) * Math.sin(theta);
+          const y = cy - R * Math.sin(phi);
+          lat2 === -90 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = `rgba(${r},${g},0, ${alpha})`;
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
+      }
+
+      // Globe dots
+      for (let lat3 = -80; lat3 <= 80; lat3 += 11) {
+        for (let lon3 = 0; lon3 < 360; lon3 += 11) {
+          const phi = lat3 * Math.PI / 180;
+          const theta = (lon3 + rot) * Math.PI / 180;
+          const z = Math.cos(phi) * Math.cos(theta);
+          if (z > 0.05) {
+            const x = cx + R * Math.cos(phi) * Math.sin(theta);
+            const y = cy - R * Math.sin(phi);
+            const t2 = (lat3 + 80) / 160;
+            const r2 = Math.round(255 * (1 - t2) + 180 * t2);
+            const g2 = Math.round(215 * (1 - t2));
+            ctx.beginPath();
+            ctx.arc(x, y, 1.6 * z + 0.4, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${r2},${g2},0, ${z * 0.85 + 0.08})`;
+            ctx.fill();
+          }
+        }
+      }
+
+      // Sphere sheen
+      const shine = ctx.createRadialGradient(cx - R * 0.32, cy - R * 0.32, 0, cx, cy, R);
+      shine.addColorStop(0, 'rgba(255,255,255,0.1)');
+      shine.addColorStop(0.45, 'rgba(255,255,255,0)');
+      shine.addColorStop(1, 'rgba(0,0,0,0.06)');
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fillStyle = shine; ctx.fill();
+
+      // Animated pulsing rings
+      const t = Date.now() / 1000;
+      for (let i = 0; i < 3; i++) {
+        const ringR = R + 12 + i * 16 + Math.sin(t * 1.2 + i * 1.8) * 4;
+        const alpha2 = (0.12 - i * 0.035) * (0.6 + 0.4 * Math.sin(t + i));
+        const fac = i / 3;
+        ctx.beginPath(); ctx.arc(cx, cy, ringR, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${255 - fac * 70},${(1 - fac) * 180},0, ${alpha2})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+
+      // PLANE orbit
+      planeA += 0.009;
+      const orbitRx = R * 1.28;
+      const orbitRy = R * 0.32;
+      const px = cx + orbitRx * Math.cos(planeA);
+      const py2 = cy + orbitRy * Math.sin(planeA);
+
+      // Plane trail
+      for (let i = 1; i <= 25; i++) {
+        const ta = planeA - i * 0.022;
+        const tx = cx + orbitRx * Math.cos(ta);
+        const ty = cy + orbitRy * Math.sin(ta);
+        const ta2 = (25 - i) / 25 * 0.55;
+        const ri = Math.round(255 - (i / 25) * 60);
+        const gi = Math.round((1 - i / 25) * 180);
+        ctx.beginPath(); ctx.arc(tx, ty, 1.8 * (1 - i / 25) + 0.3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${ri},${gi},0, ${ta2})`;
+        ctx.fill();
+      }
+
+      // Plane
+      const angle = Math.atan2(
+        orbitRy * Math.cos(planeA),
+        -orbitRx * Math.sin(planeA)
+      ) + Math.PI / 2;
+
+      ctx.save();
+      ctx.translate(px, py2);
+      ctx.rotate(angle);
+      ctx.shadowColor = 'rgba(255,215,0,0.9)';
+      ctx.shadowBlur = 10;
+
+      // Fuselage
+      ctx.beginPath();
+      ctx.fillStyle = '#FFD700';
+      ctx.moveTo(0, -13);
+      ctx.lineTo(3.5, 0);
+      ctx.lineTo(2, 5);
+      ctx.lineTo(0, 4);
+      ctx.lineTo(-2, 5);
+      ctx.lineTo(-3.5, 0);
+      ctx.closePath();
+      ctx.fill();
+
+      // Wings
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255,210,0,0.85)';
+      ctx.moveTo(0, -1);
+      ctx.lineTo(12, 6);
+      ctx.lineTo(9, 7.5);
+      ctx.lineTo(0, 3);
+      ctx.lineTo(-9, 7.5);
+      ctx.lineTo(-12, 6);
+      ctx.closePath();
+      ctx.fill();
+
+      // Tail
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255,190,0,0.7)';
+      ctx.moveTo(0, 3);
+      ctx.lineTo(5, 7);
+      ctx.lineTo(4, 8);
+      ctx.lineTo(0, 5);
+      ctx.lineTo(-4, 8);
+      ctx.lineTo(-5, 7);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+      ctx.restore();
+
+      rot += 0.18;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // ===================== FOOTER DAYTIME SKY + CLOUDS =====================
+  (function() {
+    const fc = document.getElementById('footerGlobe');
+    const fctx = fc.getContext('2d');
+
+    function resizeFc() {
+      fc.width  = fc.offsetWidth;
+      fc.height = fc.offsetHeight;
+      initScene();
+    }
+
+    /* ── Cloud ── */
+    class Cloud {
+      constructor(w, h, spawnAnywhere) {
+        this.W = w; this.H = h;
+        this.spawn(spawnAnywhere);
+      }
+
+      spawn(anywhere) {
+        // depth 0 = far background (small, slower, dimmer)
+        // depth 2 = near foreground (large, faster, brighter)
+        this.depth   = Math.floor(Math.random() * 3);          // 0,1,2
+        const scale  = 0.55 + this.depth * 0.35;               // 0.55 → 1.25
+        this.baseR   = (60 + Math.random() * 90) * scale;
+        this.speed   = (0.12 + Math.random() * 0.22) * (0.6 + this.depth * 0.4);
+        this.x       = anywhere ? Math.random() * (this.W + this.baseR * 4) - this.baseR * 2
+                                : this.W + this.baseR * 2 + Math.random() * 200;
+        // upper sky for far clouds, lower for near
+        const yBand  = this.depth === 0 ? 0.08 : this.depth === 1 ? 0.18 : 0.25;
+        this.y       = this.H * yBand + Math.random() * this.H * 0.55;
+        this.wobble  = Math.random() * Math.PI * 2;
+        this.wSpeed  = 0.003 + Math.random() * 0.005;
+        // muted blue-white depending on depth — kept dim to match dark design
+        this.bright  = this.depth === 0 ? 170 : this.depth === 1 ? 195 : 215;
+        this.alpha   = this.depth === 0 ? 0.28 : this.depth === 1 ? 0.38 : 0.50;
+
+        // build puff cluster
+        this.puffs = [];
+        const n = 4 + Math.floor(Math.random() * 6);
+        for (let i = 0; i < n; i++) {
+          const angle = (i / n) * Math.PI * 2;
+          const spread = this.baseR * (0.4 + Math.random() * 0.7);
+          this.puffs.push({
+            ox: Math.cos(angle) * spread * 0.9 + (Math.random() - 0.5) * this.baseR * 0.5,
+            oy: Math.sin(angle) * spread * 0.5 + (Math.random() - 0.5) * this.baseR * 0.25,
+            r:  this.baseR * (0.38 + Math.random() * 0.62),
+          });
+        }
+        // always add a big central dome
+        this.puffs.push({ ox: 0, oy: -this.baseR * 0.18, r: this.baseR * 1.05 });
+      }
+
+      draw(ctx, t) {
+        const wy = Math.sin(t * this.wSpeed + this.wobble) * 4;
+        const b  = this.bright;
+
+        this.puffs.forEach(p => {
+          const px = this.x + p.ox;
+          const py = this.y + p.oy + wy;
+
+          // soft shadow underneath each puff
+          const shadow = ctx.createRadialGradient(px, py + p.r * 0.3, 0, px, py + p.r * 0.3, p.r * 0.8);
+          shadow.addColorStop(0,   `rgba(140,175,210, ${this.alpha * 0.18})`);
+          shadow.addColorStop(1,   `rgba(140,175,210, 0)`);
+          ctx.beginPath(); ctx.arc(px, py + p.r * 0.3, p.r * 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = shadow; ctx.fill();
+
+          // main puff — white core fading outward
+          const g = ctx.createRadialGradient(px - p.r * 0.22, py - p.r * 0.22, p.r * 0.05,
+                                              px, py, p.r);
+          g.addColorStop(0,    `rgba(255,255,255, ${this.alpha})`);
+          g.addColorStop(0.45, `rgba(${b},${b},${b}, ${this.alpha * 0.88})`);
+          g.addColorStop(0.75, `rgba(${b-10},${b},${b+5}, ${this.alpha * 0.55})`);
+          g.addColorStop(1,    `rgba(${b-20},${b-10},${b+10}, 0)`);
+          ctx.beginPath(); ctx.arc(px, py, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = g; ctx.fill();
+
+          // bright highlight on top-left
+          const hl = ctx.createRadialGradient(px - p.r * 0.3, py - p.r * 0.3, 0,
+                                               px - p.r * 0.3, py - p.r * 0.3, p.r * 0.6);
+          hl.addColorStop(0,   `rgba(255,255,255, ${this.alpha * 0.45})`);
+          hl.addColorStop(1,   `rgba(255,255,255, 0)`);
+          ctx.beginPath(); ctx.arc(px - p.r * 0.3, py - p.r * 0.3, p.r * 0.6, 0, Math.PI * 2);
+          ctx.fillStyle = hl; ctx.fill();
+        });
+
+        this.x -= this.speed;
+        if (this.x < -this.baseR * 3) this.spawn(false);
+      }
+    }
+
+    /* ── Birds (tiny V silhouettes) ── */
+    class Bird {
+      constructor(w, h) { this.W = w; this.H = h; this.reset(); }
+      reset() {
+        this.x     = -40;
+        this.y     = this.H * (0.05 + Math.random() * 0.45);
+        this.speed = 0.5 + Math.random() * 0.8;
+        this.size  = 3 + Math.random() * 4;
+        this.flapT = Math.random() * Math.PI * 2;
+        this.flapS = 0.06 + Math.random() * 0.06;
+      }
+      draw(ctx, t) {
+        const flap = Math.sin(t * this.flapS + this.flapT) * this.size * 0.6;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.strokeStyle = 'rgba(30,60,110,0.5)';
+        ctx.lineWidth   = 1.2;
+        ctx.lineCap     = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-this.size, -flap);
+        ctx.quadraticCurveTo(0, flap * 0.5, this.size, -flap);
+        ctx.stroke();
+        ctx.restore();
+        this.x += this.speed;
+        if (this.x > this.W + 60) this.reset();
+      }
+    }
+
+    let clouds = [], birds = [];
+
+    function initScene() {
+      const w = fc.width, h = fc.height;
+      clouds = []; birds = [];
+
+      // Layer 0: far/small (5), Layer 1: mid (6), Layer 2: near/large (4)
+      [5, 6, 4].forEach((count, depth) => {
+        for (let i = 0; i < count; i++) {
+          const c = new Cloud(w, h, true);
+          c.depth = depth;
+          const scale = 0.55 + depth * 0.35;
+          c.baseR = (60 + Math.random() * 90) * scale;
+          c.speed = (0.12 + Math.random() * 0.22) * (0.6 + depth * 0.4);
+          clouds.push(c);
+        }
+      });
+
+      for (let i = 0; i < 4; i++) {
+        const b = new Bird(w, h);
+        b.x = Math.random() * w;  // start spread across canvas
+        birds.push(b);
+      }
+    }
+
+    resizeFc();
+    window.addEventListener('resize', resizeFc);
+
+    let t = 0;
+    function drawFooter() {
+      const fw = fc.width, fh = fc.height;
+      fctx.clearRect(0, 0, fw, fh);
+
+      // ── Sky gradient: deep dusk blue → steel blue → dark horizon ──
+      const sky = fctx.createLinearGradient(0, 0, 0, fh);
+      sky.addColorStop(0,    '#0a1e35');   // near-dark navy top
+      sky.addColorStop(0.30, '#0e3358');   // deep steel blue
+      sky.addColorStop(0.65, '#1a5580');   // mid blue
+      sky.addColorStop(0.85, '#1f6a96');   // slightly lighter mid
+      sky.addColorStop(1,    '#2a7aaa');   // soft blue horizon
+      fctx.fillStyle = sky;
+      fctx.fillRect(0, 0, fw, fh);
+
+      // ── Dim sun glow (top-right corner) ──
+      const sunX = fw * 0.82, sunY = fh * 0.06;
+      const sunG = fctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, fh * 0.55);
+      sunG.addColorStop(0,    'rgba(255,220,120, 0.18)');
+      sunG.addColorStop(0.15, 'rgba(255,200,80,  0.09)');
+      sunG.addColorStop(0.4,  'rgba(255,180,40,  0.04)');
+      sunG.addColorStop(1,    'rgba(255,160,0,   0)');
+      fctx.fillStyle = sunG;
+      fctx.fillRect(0, 0, fw, fh);
+
+      // ── Dark overlay — enough to keep text readable ──
+      fctx.fillStyle = 'rgba(0, 5, 20, 0.58)';
+      fctx.fillRect(0, 0, fw, fh);
+
+      // ── Subtle horizon glow ──
+      const haze = fctx.createLinearGradient(0, fh * 0.78, 0, fh);
+      haze.addColorStop(0, 'rgba(30,100,160, 0)');
+      haze.addColorStop(1, 'rgba(20,70,120,  0.18)');
+      fctx.fillStyle = haze;
+      fctx.fillRect(0, fh * 0.78, fw, fh * 0.22);
+
+      // ── Far clouds first (depth 0), then mid, then near ──
+      [0, 1, 2].forEach(d => {
+        clouds.filter(c => c.depth === d).forEach(c => c.draw(fctx, t));
+      });
+
+      // ── Birds ──
+      birds.forEach(b => b.draw(fctx, t));
+
+      t++;
+      requestAnimationFrame(drawFooter);
+    }
+    drawFooter();
+  })();
+
+  // ===================== HERO PARTICLES =====================
+  (function() {
+    const pc = document.getElementById('heroParticles');
+    const pctx = pc.getContext('2d');
+    const particles = [];
+
+    function resizeP() {
+      pc.width = window.innerWidth;
+      pc.height = window.innerHeight;
+    }
+    resizeP();
+    window.addEventListener('resize', resizeP);
+
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.8 + 0.3,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        gold: Math.random() > 0.5
+      });
+    }
+
+    function drawParticles() {
+      pctx.clearRect(0, 0, pc.width, pc.height);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = pc.width;
+        if (p.x > pc.width) p.x = 0;
+        if (p.y < 0) p.y = pc.height;
+        if (p.y > pc.height) p.y = 0;
+        pctx.beginPath();
+        pctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        pctx.fillStyle = p.gold ? 'rgba(255,215,0,0.25)' : 'rgba(200,0,0,0.2)';
+        pctx.fill();
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  })();
+
+  // ===================== SCROLL REVEAL =====================
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => io.observe(el));
+
+  // ===================== COUNTER =====================
+  function countUp(el, target) {
+    const step = Math.ceil(target / 55);
+    let n = 0;
+    const t = setInterval(() => {
+      n = Math.min(n + step, target);
+      el.textContent = n;
+      if (n >= target) clearInterval(t);
+    }, 28);
+  }
+
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        countUp(e.target, parseInt(e.target.dataset.target));
+        cio.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll('.counter').forEach(el => cio.observe(el));
+
+  // ===================== FORM =====================
+  function handleForm(e) {
+    e.preventDefault();
+    window.open('https://wa.me/642902010404?text=Hello%20TRU%20Global!%20I%27d%20like%20to%20make%20an%20appointment.', '_blank');
+  }
+  </script>
+</body>
+</html>
