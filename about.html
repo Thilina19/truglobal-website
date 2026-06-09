@@ -9,11 +9,11 @@
   <style>
     :root {
       --gold: #FFD700; --gold-light: #FFE55C; --gold-dark: #B8860B;
-      --red: #CC0000; --red-dark: #8B0000;
+      --red: #D4840A; --red-dark: #A85F00;
       --black: #0A0A0A; --dark: #111111; --dark2: #1a1a1a;
       --text: #333333; --text-light: #666666; --white: #FFFFFF;
-      --gradient: linear-gradient(135deg, #FFD700 0%, #CC0000 100%);
-      --gradient-lr: linear-gradient(90deg, #FFD700 0%, #CC0000 100%);
+      --gradient: linear-gradient(135deg, #FFE033 0%, #D4840A 100%);
+      --gradient-lr: linear-gradient(90deg, #FFE033 0%, #D4840A 100%);
       --gradient-tb: linear-gradient(180deg, #FFD700 0%, #CC0000 100%);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,8 +45,12 @@
       box-shadow: 0 3px 12px rgba(37,211,102,0.3);
     }
     .nav-wa:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; z-index: 1001; }
     .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 998; backdrop-filter: blur(2px); }
 
     /* ===== PAGE HERO ===== */
     .page-hero {
@@ -192,22 +196,79 @@
     /* ===== TEAM ===== */
     #team { background: white; }
     .team-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
-    .team-card { background: white; border-radius: 22px; overflow: hidden; border: 1px solid #eee; transition: all 0.35s; }
+    .team-card {
+      background: white; border-radius: 22px; overflow: hidden;
+      border: 1px solid #eee; transition: all 0.35s;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    }
     .team-card:hover { transform: translateY(-9px); box-shadow: 0 22px 60px rgba(0,0,0,0.13); }
-    .team-img { position: relative; height: 280px; overflow: hidden; background: linear-gradient(135deg, #f0f0f0, #e0e0e0); }
-    .team-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
-    .team-card:hover .team-img img { transform: scale(1.05); }
-    .team-overlay {
-      position: absolute; inset: 0; background: var(--gradient); opacity: 0;
-      transition: opacity 0.35s; display: flex; align-items: center; justify-content: center; gap: 1rem;
+
+    /* Avatar area replacing photo */
+    .team-avatar-wrap {
+      position: relative; height: 240px;
+      background: linear-gradient(145deg, #0a0a0a 0%, #1a1208 50%, #0d0a02 100%);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
-    .team-card:hover .team-overlay { opacity: 0.88; }
-    .tsoc {
-      width: 44px; height: 44px; background: white; border-radius: 50%;
+    .team-avatar-wrap::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(255,215,0,0.12) 0%, transparent 70%);
+    }
+    /* decorative rings */
+    .team-avatar-wrap::after {
+      content: ''; position: absolute;
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 1px solid rgba(255,215,0,0.12);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .team-avatar-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(255,215,0,0.08);
+    }
+    .team-avatar-ring.r1 { width: 200px; height: 200px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .team-avatar-ring.r2 { width: 250px; height: 250px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .team-avatar {
+      position: relative; z-index: 2;
+      width: 110px; height: 110px; border-radius: 50%;
+      background: linear-gradient(145deg, #FFE033 0%, #D4840A 55%, #8B5E00 100%);
       display: flex; align-items: center; justify-content: center;
-      color: var(--red); font-size: 1rem; text-decoration: none; transition: transform 0.2s;
+      box-shadow: 0 0 0 4px rgba(255,215,0,0.18), 0 8px 32px rgba(0,0,0,0.55);
+      transition: box-shadow 0.35s, transform 0.35s;
     }
-    .tsoc:hover { transform: scale(1.1); }
+    .team-card:hover .team-avatar {
+      box-shadow: 0 0 0 6px rgba(255,215,0,0.35), 0 12px 40px rgba(0,0,0,0.6);
+      transform: scale(1.05);
+    }
+    .team-avatar-initials {
+      font-size: 2.2rem; font-weight: 900; color: #0a0a0a;
+      letter-spacing: -1px; font-family: 'Inter', sans-serif;
+      text-shadow: 0 1px 3px rgba(255,255,255,0.15);
+    }
+    /* icon badge bottom of avatar */
+    .team-avatar-icon {
+      position: absolute; z-index: 3;
+      bottom: 44px; left: 50%; transform: translateX(-50%) translateY(50%);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, #FFE033, #D4840A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: #0a0a0a;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    /* social links on hover */
+    .team-socials {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+      display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+      padding: 0.9rem; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      opacity: 0; transition: opacity 0.35s;
+    }
+    .team-card:hover .team-socials { opacity: 1; }
+    .tsoc {
+      width: 38px; height: 38px; background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,215,0,0.4); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #FFD700; font-size: 0.88rem; text-decoration: none; transition: all 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .tsoc:hover { background: #FFD700; color: #0a0a0a; transform: scale(1.1); }
     .team-info { padding: 1.5rem; text-align: center; }
     .team-info h3 { font-size: 1.08rem; font-weight: 800; color: var(--black); margin-bottom: 0.2rem; }
     .team-role { font-size: 0.82rem; margin-bottom: 0.65rem; }
@@ -227,7 +288,7 @@
     }
     .cty-card:hover::before { opacity: 1; }
     .cty-card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(204,0,0,0.2); }
-    .cty-flag { font-size: 2.3rem; display: block; margin-bottom: 0.45rem; }
+    .cty-flag { width: 56px; height: 38px; object-fit: cover; border-radius: 5px; display: block; margin-bottom: 0.45rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
     .cty-name { font-weight: 800; font-size: 0.88rem; color: var(--black); }
 
     /* ===== CTA ===== */
@@ -319,7 +380,9 @@
     @media(max-width:1024px){ .mv-grid{grid-template-columns:repeat(2,1fr)} .team-grid{grid-template-columns:repeat(2,1fr)} }
     @media(max-width:768px){
       .hamburger{display:flex}
-      .nav-links{display:none;position:fixed;top:0;right:0;bottom:0;width:280px;background:#0d0d0d;padding:5rem 2rem 2rem;flex-direction:column;align-items:flex-start;gap:1.5rem;z-index:999;transform:translateX(100%);transition:transform 0.4s}
+      .nav-links{display:flex;position:fixed;top:0;right:0;bottom:0;width:280px;background:linear-gradient(160deg,#0f0f0f 0%,#1a0f00 40%,#120a00 70%,#0a0a0a 100%);padding:5rem 2rem 2rem;flex-direction:column;align-items:flex-start;gap:1.5rem;z-index:999;transform:translateX(100%);transition:transform 0.4s;box-shadow:-8px 0 40px rgba(0,0,0,0.7);border-left:1px solid rgba(255,215,0,0.12)}
+      .nav-links::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#FFE033,#D4840A)}
+      .nav-links::after{content:"";position:absolute;bottom:30%;right:-20px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,50,0.08) 0%,transparent 70%);pointer-events:none}
       .nav-links.open{transform:translateX(0)}
       .navbar{padding:1rem 1.5rem}
       .story-grid,.values-grid{grid-template-columns:1fr}
@@ -344,6 +407,7 @@
     <a href="index.html" class="nav-logo">
       <img src="logo.png" alt="TRU Global Recruitment & Consultants" class="nav-logo-img">
     </a>
+    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html" class="active">About Us</a></li>
@@ -538,9 +602,14 @@
     </div>
     <div class="team-grid">
       <div class="team-card reveal delay-1">
-        <div class="team-img">
-          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=85" alt="Mr. Upul Chandima - Founder & Director" loading="lazy">
-          <div class="team-overlay">
+        <div class="team-avatar-wrap">
+          <div class="team-avatar-ring r1"></div>
+          <div class="team-avatar-ring r2"></div>
+          <div class="team-avatar">
+            <span class="team-avatar-initials">UC</span>
+          </div>
+          <div class="team-avatar-icon"><i class="fas fa-briefcase"></i></div>
+          <div class="team-socials">
             <a href="https://wa.me/642902010404" target="_blank" class="tsoc"><i class="fab fa-whatsapp"></i></a>
             <a href="#" class="tsoc"><i class="fab fa-linkedin-in"></i></a>
           </div>
@@ -548,13 +617,18 @@
         <div class="team-info">
           <h3>Mr. Upul Chandima</h3>
           <div class="team-role"><span>Founder &amp; Director</span></div>
-          <p class="team-bio">Management Coach Â· Career Coach Â· Marketing Coach. Over 15 years of experience in talent management and organizational development across multiple countries.</p>
+          <p class="team-bio">Management Coach · Career Coach · Marketing Coach. Over 15 years of experience in talent management and organizational development across multiple countries.</p>
         </div>
       </div>
       <div class="team-card reveal delay-2">
-        <div class="team-img">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=85" alt="Senior Career Consultant" loading="lazy">
-          <div class="team-overlay">
+        <div class="team-avatar-wrap">
+          <div class="team-avatar-ring r1"></div>
+          <div class="team-avatar-ring r2"></div>
+          <div class="team-avatar">
+            <span class="team-avatar-initials">SC</span>
+          </div>
+          <div class="team-avatar-icon"><i class="fas fa-user-tie"></i></div>
+          <div class="team-socials">
             <a href="https://wa.me/642902010404" target="_blank" class="tsoc"><i class="fab fa-whatsapp"></i></a>
             <a href="#" class="tsoc"><i class="fab fa-linkedin-in"></i></a>
           </div>
@@ -562,13 +636,18 @@
         <div class="team-info">
           <h3>Senior Consultant</h3>
           <div class="team-role"><span>Career Coach &amp; Recruiter</span></div>
-          <p class="team-bio">CV Preparation Â· Interview Coaching Â· Career Planning. Specialising in professional development and cross-cultural placements throughout Asia-Pacific.</p>
+          <p class="team-bio">CV Preparation · Interview Coaching · Career Planning. Specialising in professional development and cross-cultural placements throughout Asia-Pacific.</p>
         </div>
       </div>
       <div class="team-card reveal delay-3">
-        <div class="team-img">
-          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=85" alt="Business Development Manager" loading="lazy">
-          <div class="team-overlay">
+        <div class="team-avatar-wrap">
+          <div class="team-avatar-ring r1"></div>
+          <div class="team-avatar-ring r2"></div>
+          <div class="team-avatar">
+            <span class="team-avatar-initials">MC</span>
+          </div>
+          <div class="team-avatar-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="team-socials">
             <a href="https://wa.me/642902010404" target="_blank" class="tsoc"><i class="fab fa-whatsapp"></i></a>
             <a href="#" class="tsoc"><i class="fab fa-linkedin-in"></i></a>
           </div>
@@ -576,7 +655,7 @@
         <div class="team-info">
           <h3>Marketing Coach</h3>
           <div class="team-role"><span>Business Development</span></div>
-          <p class="team-bio">Brand Strategy Â· Client Relations Â· Growth Marketing. Driving TRU Global's expansion across international markets with strategic precision.</p>
+          <p class="team-bio">Brand Strategy · Client Relations · Growth Marketing. Driving TRU Global's expansion across international markets with strategic precision.</p>
         </div>
       </div>
     </div>
@@ -591,13 +670,13 @@
       <p class="sec-desc">Our recruitment network spans across 7+ countries, bridging talent and opportunity worldwide.</p>
     </div>
     <div class="cty-grid reveal">
-      <div class="cty-card"><span class="cty-flag">ðŸ‡³ðŸ‡¿</span><div class="cty-name">New Zealand</div></div>
-      <div class="cty-card"><span class="cty-flag">ðŸ‡±ðŸ‡°</span><div class="cty-name">Sri Lanka</div></div>
-      <div class="cty-card"><span class="cty-flag">ðŸ‡¦ðŸ‡º</span><div class="cty-name">Australia</div></div>
-      <div class="cty-card"><span class="cty-flag">ðŸ‡¶ðŸ‡¦</span><div class="cty-name">Qatar</div></div>
-      <div class="cty-card"><span class="cty-flag">ðŸ‡¦ðŸ‡ª</span><div class="cty-name">UAE</div></div>
-      <div class="cty-card"><span class="cty-flag">ðŸ‡´ðŸ‡²</span><div class="cty-name">Oman</div></div>
-      <div class="cty-card"><span class="cty-flag">ðŸ‡¨ðŸ‡¦</span><div class="cty-name">Canada</div></div>
+      <div class="cty-card"><img src="https://flagcdn.com/nz.svg" class="cty-flag" alt="New Zealand"><div class="cty-name">New Zealand</div></div>
+      <div class="cty-card"><img src="https://flagcdn.com/lk.svg" class="cty-flag" alt="Sri Lanka"><div class="cty-name">Sri Lanka</div></div>
+      <div class="cty-card"><img src="https://flagcdn.com/au.svg" class="cty-flag" alt="Australia"><div class="cty-name">Australia</div></div>
+      <div class="cty-card"><img src="https://flagcdn.com/qa.svg" class="cty-flag" alt="Qatar"><div class="cty-name">Qatar</div></div>
+      <div class="cty-card"><img src="https://flagcdn.com/ae.svg" class="cty-flag" alt="UAE"><div class="cty-name">UAE</div></div>
+      <div class="cty-card"><img src="https://flagcdn.com/om.svg" class="cty-flag" alt="Oman"><div class="cty-name">Oman</div></div>
+      <div class="cty-card"><img src="https://flagcdn.com/ca.svg" class="cty-flag" alt="Canada"><div class="cty-name">Canada</div></div>
     </div>
   </section>
 
@@ -687,66 +766,50 @@
     drawP();
   })();
 
-  // FOOTER ANIMATION
-  (function() {
-    const fc = document.getElementById('footerGlobe');
-    const fctx = fc.getContext('2d');
-    function resizeFc() { fc.width=fc.offsetWidth; fc.height=fc.offsetHeight; initScene(); }
-    class Cloud {
-      constructor(w,h,anywhere){ this.W=w;this.H=h;this.spawn(anywhere); }
-      spawn(anywhere){
-        this.depth=Math.floor(Math.random()*3);
-        const scale=0.55+this.depth*0.35; this.baseR=(60+Math.random()*90)*scale;
-        this.speed=(0.12+Math.random()*0.22)*(0.6+this.depth*0.4);
-        this.x=anywhere?Math.random()*(this.W+this.baseR*4)-this.baseR*2:this.W+this.baseR*2+Math.random()*200;
-        const yBand=this.depth===0?0.08:this.depth===1?0.18:0.25;
-        this.y=this.H*yBand+Math.random()*this.H*0.55;
-        this.wobble=Math.random()*Math.PI*2; this.wSpeed=0.003+Math.random()*0.005;
-        this.bright=this.depth===0?170:this.depth===1?195:215;
-        this.alpha=this.depth===0?0.28:this.depth===1?0.38:0.50;
-        this.puffs=[]; const n=4+Math.floor(Math.random()*6);
-        for(let i=0;i<n;i++){const angle=(i/n)*Math.PI*2;const spread=this.baseR*(0.4+Math.random()*0.7);this.puffs.push({ox:Math.cos(angle)*spread*0.9+(Math.random()-0.5)*this.baseR*0.5,oy:Math.sin(angle)*spread*0.5+(Math.random()-0.5)*this.baseR*0.25,r:this.baseR*(0.38+Math.random()*0.62)});}
-        this.puffs.push({ox:0,oy:-this.baseR*0.18,r:this.baseR*1.05});
-      }
-      draw(ctx,t){
-        const wy=Math.sin(t*this.wSpeed+this.wobble)*4; const b=this.bright;
-        this.puffs.forEach(p=>{
-          const px=this.x+p.ox; const py=this.y+p.oy+wy;
-          const shadow=ctx.createRadialGradient(px,py+p.r*0.3,0,px,py+p.r*0.3,p.r*0.8);
-          shadow.addColorStop(0,`rgba(140,175,210,${this.alpha*0.18})`); shadow.addColorStop(1,'rgba(140,175,210,0)');
-          ctx.beginPath();ctx.arc(px,py+p.r*0.3,p.r*0.8,0,Math.PI*2);ctx.fillStyle=shadow;ctx.fill();
-          const g=ctx.createRadialGradient(px-p.r*0.22,py-p.r*0.22,p.r*0.05,px,py,p.r);
-          g.addColorStop(0,`rgba(255,255,255,${this.alpha})`);g.addColorStop(0.45,`rgba(${b},${b},${b},${this.alpha*0.88})`);g.addColorStop(0.75,`rgba(${b-10},${b},${b+5},${this.alpha*0.55})`);g.addColorStop(1,`rgba(${b-20},${b-10},${b+10},0)`);
-          ctx.beginPath();ctx.arc(px,py,p.r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-          const hl=ctx.createRadialGradient(px-p.r*0.3,py-p.r*0.3,0,px-p.r*0.3,py-p.r*0.3,p.r*0.6);
-          hl.addColorStop(0,`rgba(255,255,255,${this.alpha*0.45})`);hl.addColorStop(1,'rgba(255,255,255,0)');
-          ctx.beginPath();ctx.arc(px-p.r*0.3,py-p.r*0.3,p.r*0.6,0,Math.PI*2);ctx.fillStyle=hl;ctx.fill();
-        });
-        this.x-=this.speed; if(this.x<-this.baseR*3)this.spawn(false);
-      }
-    }
+  // FOOTER NIGHT SKYLINE ANIMATION
+  (function(){
+    const fc=document.getElementById('footerGlobe'),fctx=fc.getContext('2d');
+    function resizeFc(){fc.width=fc.offsetWidth;fc.height=fc.offsetHeight;initScene();}
+    let stars=[];
+    function buildStars(w,h){stars=[];for(let i=0;i<160;i++)stars.push({x:Math.random()*w,y:Math.random()*h*0.72,r:Math.random()*1.4+0.3,alpha:Math.random()*0.7+0.2,ts:0.008+Math.random()*0.018,to:Math.random()*Math.PI*2,gold:Math.random()>0.65});}
     class Bird{
-      constructor(w,h){this.W=w;this.H=h;this.reset();}
-      reset(){this.x=-40;this.y=this.H*(0.05+Math.random()*0.45);this.speed=0.5+Math.random()*0.8;this.size=3+Math.random()*4;this.flapT=Math.random()*Math.PI*2;this.flapS=0.06+Math.random()*0.06;}
-      draw(ctx,t){const flap=Math.sin(t*this.flapS+this.flapT)*this.size*0.6;ctx.save();ctx.translate(this.x,this.y);ctx.strokeStyle='rgba(30,60,110,0.5)';ctx.lineWidth=1.2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-this.size,-flap);ctx.quadraticCurveTo(0,flap*0.5,this.size,-flap);ctx.stroke();ctx.restore();this.x+=this.speed;if(this.x>this.W+60)this.reset();}
+      constructor(w,h){this.W=w;this.H=h;this.reset(true);}
+      reset(s){this.x=s?Math.random()*this.W:-50;this.y=this.H*(0.06+Math.random()*0.38);this.speed=0.6+Math.random()*1.0;this.size=4+Math.random()*5;this.flapT=Math.random()*Math.PI*2;this.flapS=0.05+Math.random()*0.05;this.alpha=0.55+Math.random()*0.35;}
+      draw(ctx,t){const flap=Math.sin(t*this.flapS+this.flapT)*this.size*0.65;ctx.save();ctx.translate(this.x,this.y);ctx.strokeStyle=`rgba(255,215,80,${this.alpha})`;ctx.lineWidth=1.4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-this.size,-flap);ctx.quadraticCurveTo(0,flap*0.4,this.size,-flap);ctx.stroke();ctx.restore();this.x+=this.speed;if(this.x>this.W+60)this.reset(false);}
     }
-    let clouds=[],birds=[];
-    function initScene(){const w=fc.width,h=fc.height;clouds=[];birds=[];[5,6,4].forEach((count,depth)=>{for(let i=0;i<count;i++){const c=new Cloud(w,h,true);c.depth=depth;const scale=0.55+depth*0.35;c.baseR=(60+Math.random()*90)*scale;c.speed=(0.12+Math.random()*0.22)*(0.6+depth*0.4);clouds.push(c);}});for(let i=0;i<4;i++){const b=new Bird(w,h);b.x=Math.random()*w;birds.push(b);}}
-    resizeFc(); window.addEventListener('resize',resizeFc);
+    class Plane{
+      constructor(w,h){this.W=w;this.H=h;this.reset(true);}
+      reset(s){this.fromLeft=Math.random()>0.5;this.x=s?Math.random()*this.W:(this.fromLeft?-120:this.W+120);this.y=this.H*(0.04+Math.random()*0.32);this.speed=(0.4+Math.random()*0.5)*(this.fromLeft?1:-1);this.size=10+Math.random()*8;this.blinkT=Math.random()*Math.PI*2;this.blinkS=0.04+Math.random()*0.04;this.trail=[];}
+      draw(ctx,t){
+        this.trail.push({x:this.x,y:this.y});if(this.trail.length>28)this.trail.shift();
+        if(this.trail.length>2){ctx.beginPath();ctx.moveTo(this.trail[0].x,this.trail[0].y);for(let i=1;i<this.trail.length;i++)ctx.lineTo(this.trail[i].x,this.trail[i].y);const tg=ctx.createLinearGradient(this.trail[0].x,0,this.trail[this.trail.length-1].x,0);tg.addColorStop(0,'rgba(255,230,120,0)');tg.addColorStop(1,'rgba(255,230,120,0.18)');ctx.strokeStyle=tg;ctx.lineWidth=1.2;ctx.stroke();}
+        ctx.save();ctx.translate(this.x,this.y);if(!this.fromLeft)ctx.scale(-1,1);const s=this.size;
+        ctx.beginPath();ctx.moveTo(s*1.2,0);ctx.lineTo(-s*0.8,s*0.18);ctx.lineTo(-s*1.0,0);ctx.lineTo(-s*0.8,-s*0.18);ctx.closePath();ctx.fillStyle='rgba(220,230,255,0.82)';ctx.fill();
+        ctx.beginPath();ctx.moveTo(s*0.1,0);ctx.lineTo(-s*0.3,-s*0.72);ctx.lineTo(-s*0.55,-s*0.72);ctx.lineTo(-s*0.4,0);ctx.closePath();ctx.fillStyle='rgba(200,215,255,0.75)';ctx.fill();
+        ctx.beginPath();ctx.moveTo(s*0.1,0);ctx.lineTo(-s*0.3,s*0.72);ctx.lineTo(-s*0.55,s*0.72);ctx.lineTo(-s*0.4,0);ctx.closePath();ctx.fillStyle='rgba(200,215,255,0.65)';ctx.fill();
+        ctx.beginPath();ctx.moveTo(-s*0.75,0);ctx.lineTo(-s*0.95,-s*0.38);ctx.lineTo(-s*1.0,0);ctx.closePath();ctx.fillStyle='rgba(200,215,255,0.7)';ctx.fill();
+        ctx.restore();
+        const blink=(Math.sin(t*this.blinkS+this.blinkT)+1)*0.5;
+        if(blink>0.7){const lx=this.x+(this.fromLeft?s*1.1:-s*1.1);ctx.beginPath();ctx.arc(lx,this.y,2.2,0,Math.PI*2);ctx.fillStyle=`rgba(255,80,80,${blink*0.9})`;ctx.fill();const bg=ctx.createRadialGradient(lx,this.y,0,lx,this.y,7);bg.addColorStop(0,`rgba(255,80,80,${blink*0.4})`);bg.addColorStop(1,'rgba(255,80,80,0)');ctx.beginPath();ctx.arc(lx,this.y,7,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();}
+        this.x+=this.speed;const gone=this.fromLeft?this.x>this.W+150:this.x<-150;if(gone)this.reset(false);
+      }
+    }
+    function buildSkyline(w,h){const blds=[];let x=0;const sy=h*0.72;while(x<w){const bw=18+Math.random()*48,bh=30+Math.random()*h*0.45,wins=[];const cols=Math.floor(bw/9),rows=Math.floor(bh/12);for(let c=0;c<cols;c++)for(let r=0;r<rows;r++)wins.push({x:x+3+c*9,y:sy-bh+5+r*12,on:Math.random()>0.45});blds.push({x,y:sy-bh,w:bw,h:bh,wins});x+=bw+2+Math.random()*8;}return{blds,sy};}
+    let birds=[],planes=[],skyline=null;
+    function initScene(){const w=fc.width,h=fc.height;buildStars(w,h);birds=[];for(let i=0;i<6;i++)birds.push(new Bird(w,h));planes=[];for(let i=0;i<2;i++)planes.push(new Plane(w,h));skyline=buildSkyline(w,h);}
+    resizeFc();window.addEventListener('resize',resizeFc);
     let t=0;
     function drawFooter(){
-      const fw=fc.width,fh=fc.height; fctx.clearRect(0,0,fw,fh);
-      const sky=fctx.createLinearGradient(0,0,0,fh);
-      sky.addColorStop(0,'#0a1e35');sky.addColorStop(0.30,'#0e3358');sky.addColorStop(0.65,'#1a5580');sky.addColorStop(0.85,'#1f6a96');sky.addColorStop(1,'#2a7aaa');
-      fctx.fillStyle=sky;fctx.fillRect(0,0,fw,fh);
-      const sunX=fw*0.82,sunY=fh*0.06;const sunG=fctx.createRadialGradient(sunX,sunY,0,sunX,sunY,fh*0.55);
-      sunG.addColorStop(0,'rgba(255,220,120,0.18)');sunG.addColorStop(0.15,'rgba(255,200,80,0.09)');sunG.addColorStop(0.4,'rgba(255,180,40,0.04)');sunG.addColorStop(1,'rgba(255,160,0,0)');
-      fctx.fillStyle=sunG;fctx.fillRect(0,0,fw,fh);
-      fctx.fillStyle='rgba(0,5,20,0.58)';fctx.fillRect(0,0,fw,fh);
-      const haze=fctx.createLinearGradient(0,fh*0.78,0,fh);haze.addColorStop(0,'rgba(30,100,160,0)');haze.addColorStop(1,'rgba(20,70,120,0.18)');fctx.fillStyle=haze;fctx.fillRect(0,fh*0.78,fw,fh*0.22);
-      [0,1,2].forEach(d=>clouds.filter(c=>c.depth===d).forEach(c=>c.draw(fctx,t)));
-      birds.forEach(b=>b.draw(fctx,t)); t++;
-      requestAnimationFrame(drawFooter);
+      const fw=fc.width,fh=fc.height;fctx.clearRect(0,0,fw,fh);
+      const sky=fctx.createLinearGradient(0,0,0,fh);sky.addColorStop(0,'#03080f');sky.addColorStop(0.35,'#060d1a');sky.addColorStop(0.65,'#091525');sky.addColorStop(0.85,'#0d1e35');sky.addColorStop(1,'#122540');fctx.fillStyle=sky;fctx.fillRect(0,0,fw,fh);
+      const mx=fw*0.84,my=fh*0.10;const mg=fctx.createRadialGradient(mx,my,0,mx,my,fh*0.5);mg.addColorStop(0,'rgba(255,235,150,0.22)');mg.addColorStop(0.12,'rgba(255,220,100,0.10)');mg.addColorStop(0.35,'rgba(255,200,60,0.04)');mg.addColorStop(1,'rgba(255,180,0,0)');fctx.fillStyle=mg;fctx.fillRect(0,0,fw,fh);
+      fctx.beginPath();fctx.arc(mx,my,11,0,Math.PI*2);const md=fctx.createRadialGradient(mx-3,my-3,0,mx,my,11);md.addColorStop(0,'rgba(255,248,200,0.95)');md.addColorStop(0.6,'rgba(255,235,150,0.80)');md.addColorStop(1,'rgba(255,220,100,0.50)');fctx.fillStyle=md;fctx.fill();
+      stars.forEach(s=>{const tw=Math.sin(t*s.ts+s.to);const a=s.alpha*(0.55+0.45*tw);fctx.beginPath();fctx.arc(s.x,s.y,s.r,0,Math.PI*2);fctx.fillStyle=s.gold?`rgba(255,230,120,${a})`:`rgba(200,220,255,${a})`;fctx.fill();});
+      planes.forEach(p=>p.draw(fctx,t));
+      birds.forEach(b=>b.draw(fctx,t));
+      if(skyline){const{blds,sy}=skyline;fctx.fillStyle='#040810';fctx.fillRect(0,sy,fw,fh-sy);blds.forEach(b=>{fctx.fillStyle='#07101e';fctx.fillRect(b.x,b.y,b.w,b.h);fctx.fillStyle='rgba(255,200,80,0.04)';fctx.fillRect(b.x,b.y,1,b.h);fctx.fillRect(b.x+b.w-1,b.y,1,b.h);b.wins.forEach(w=>{if(!w.on)return;const wg=fctx.createRadialGradient(w.x+2,w.y+2,0,w.x+2,w.y+2,5);wg.addColorStop(0,'rgba(255,230,140,0.75)');wg.addColorStop(1,'rgba(255,180,60,0)');fctx.fillStyle=wg;fctx.fillRect(w.x,w.y,5,6);});});const hg=fctx.createLinearGradient(0,sy-fh*0.18,0,sy+6);hg.addColorStop(0,'rgba(255,180,40,0)');hg.addColorStop(1,'rgba(255,150,20,0.14)');fctx.fillStyle=hg;fctx.fillRect(0,sy-fh*0.18,fw,fh*0.18+6);}
+      fctx.fillStyle='rgba(0,3,10,0.52)';fctx.fillRect(0,0,fw,fh);
+      t++;requestAnimationFrame(drawFooter);
     }
     drawFooter();
   })();
