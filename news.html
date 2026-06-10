@@ -123,7 +123,7 @@
 
     /* FOOTER */
     #footer{background:#0d2f4a;color:white;position:relative;overflow:hidden;margin-top:-1px}
-    .footer-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:0.8;pointer-events:none;z-index:0} .footer-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(8,5,0,0.05) 0%,rgba(8,5,0,0.4) 30%,rgba(8,5,0,0.82) 62%,rgba(8,5,0,0.97) 100%)}
+    .footer-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:0.8;pointer-events:none;z-index:0} .footer-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(4,2,0,0.98) 0%,rgba(4,2,0,0.88) 7%,rgba(4,2,0,0.55) 17%,rgba(4,2,0,0.12) 30%,rgba(4,2,0,0.06) 48%,rgba(4,2,0,0.42) 63%,rgba(4,2,0,0.88) 80%,rgba(4,2,0,0.97) 100%)}
     .footer-inner{position:relative;z-index:5}
     .footer-main{max-width:1180px;margin:0 auto;padding:5rem 3rem 3rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem}
     .fb-logo{display:flex;align-items:center;margin-bottom:1.2rem}.fb-logo-img{height:80px;width:auto;background:white;padding:5px 10px;border-radius:8px}
@@ -444,6 +444,59 @@
 
   
 
+
+  // FOOTER BIRDS ANIMATION
+  (function() {
+    const footer = document.getElementById('footer');
+    if (!footer) return;
+    const cvs = document.createElement('canvas');
+    cvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;';
+    footer.appendChild(cvs);
+    const ctx = cvs.getContext('2d');
+    let W = 0, H = 0;
+    function resize() { W = cvs.width = footer.offsetWidth; H = cvs.height = footer.offsetHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+    class Bird {
+      constructor(scatter) { this.reset(scatter); }
+      reset(scatter) {
+        this.fromLeft = Math.random() > 0.5;
+        this.x = scatter ? Math.random() * W : (this.fromLeft ? -70 : W + 70);
+        this.y = H * (0.06 + Math.random() * 0.44);
+        this.speed = (0.45 + Math.random() * 0.85) * (this.fromLeft ? 1 : -1);
+        this.size = 5 + Math.random() * 9;
+        this.flapT = Math.random() * Math.PI * 2;
+        this.flapS = 0.035 + Math.random() * 0.055;
+        this.alpha = 0.55 + Math.random() * 0.4;
+      }
+      draw(t) {
+        const flap = Math.sin(t * this.flapS + this.flapT) * this.size * 0.72;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        if (!this.fromLeft) ctx.scale(-1, 1);
+        ctx.strokeStyle = `rgba(8,4,0,${this.alpha})`;
+        ctx.lineWidth = 1.6;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-this.size, -flap);
+        ctx.quadraticCurveTo(0, flap * 0.28, this.size, -flap);
+        ctx.stroke();
+        ctx.restore();
+        this.x += this.speed;
+        if (this.fromLeft ? this.x > W + 90 : this.x < -90) this.reset(false);
+      }
+    }
+    const birds = [];
+    for (let i = 0; i < 12; i++) birds.push(new Bird(true));
+    let t = 0;
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (const b of birds) b.draw(t);
+      t++;
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
   // SITE-WIDE FLOATING DOTS
   (function() {
     const cvs = document.createElement('canvas');
