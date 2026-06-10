@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "TRU Global Website",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "3005", "."],
+      "port": 3005
+    }
+  ]
+}
