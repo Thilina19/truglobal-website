@@ -9,7 +9,7 @@
   <style>
     :root {
       --gold: #FFB830; --gold-light: #FFE060; --gold-dark: #B07000;
-      --red: #D44000; --red-dark: #9A2E00;
+      --red: #8A4500; --red-dark: #5A2800;
       --black: #080500; --dark: #0F0800; --dark2: #1C1000;
       --text: #333333; --text-light: #666666; --white: #FFFFFF;
       --gradient: linear-gradient(135deg, #FFE060 0%, #B07000 100%);
@@ -368,12 +368,12 @@
     @keyframes waPop { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.45)} 50%{box-shadow:0 4px 40px rgba(37,211,102,0.7),0 0 0 12px rgba(37,211,102,0.08)} }
 
     /* ===== REVEAL ===== */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.on { opacity: 1; transform: translateY(0); }
-    .reveal-l { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal-l.on { opacity: 1; transform: translateX(0); }
-    .reveal-r { opacity: 0; transform: translateX(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal-r.on { opacity: 1; transform: translateX(0); }
+    @keyframes revFadeUp { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:none; } }
+    @keyframes revFadeL  { from { opacity:0; transform:translateX(-26px); } to { opacity:1; transform:none; } }
+    @keyframes revFadeR  { from { opacity:0; transform:translateX(26px);  } to { opacity:1; transform:none; } }
+    .reveal   { animation: revFadeUp .7s ease both .2s; }
+    .reveal-l { animation: revFadeL  .7s ease both .2s; }
+    .reveal-r { animation: revFadeR  .7s ease both .2s; }
     .delay-1{transition-delay:0.1s} .delay-2{transition-delay:0.2s} .delay-3{transition-delay:0.3s}
     .delay-4{transition-delay:0.4s} .delay-5{transition-delay:0.5s}
 
@@ -738,6 +738,7 @@
       <div class="footer-bottom">
         <p>© 2024 TRU Global Recruitment &amp; Consultants. All rights reserved.</p>
         <p><a href="https://truglobalrec.co.nz" target="_blank">truglobalrec.co.nz</a></p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5)">Social &amp; Digital by <a href="#" style="color:var(--gold);font-weight:700">SocialIgnit</a></p>
       </div>
     </div>
   </footer>
@@ -853,8 +854,9 @@
     frame();
   })();
   // SCROLL REVEAL
-  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }); }, { threshold: 0.1 });
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }); }, { threshold: 0.05, rootMargin: '0px 0px 60px 0px' });
   document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => io.observe(el));
+  setTimeout(() => document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => el.classList.add('on')), 900);
 
   // COUNTER
   function countUp(el, target) { const step=Math.ceil(target/55); let n=0; const t=setInterval(()=>{ n=Math.min(n+step,target); el.textContent=n; if(n>=target)clearInterval(t); },28); }

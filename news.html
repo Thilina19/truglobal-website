@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{--gold:#FFD700;--gold-dark:#B8860B;--red:#D4840A;--text:#333;--text-light:#666;--black:#0A0A0A;--gradient-lr:linear-gradient(90deg,#FFD700 0%,#CC0000 100%);--gradient:linear-gradient(135deg,#FFD700 0%,#CC0000 100%)}
+    :root{--gold:#FFB830;--gold-dark:#B07000;--red:#8A4500;--text:#333;--text-light:#666;--black:#080500;--gradient-lr:linear-gradient(90deg,#FFE060 0%,#B07000 100%);--gradient:linear-gradient(135deg,#FFE060 0%,#B07000 100%)}
     *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
     body{font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
     .navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,.96);backdrop-filter:blur(12px);box-shadow:0 2px 30px rgba(0,0,0,.4);border-bottom:1px solid rgba(255,215,0,.08)}
@@ -136,15 +136,15 @@
     .fc ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
     .fc ul a{color:rgba(255,255,255,.88);text-decoration:none;font-size:.88rem;transition:color .3s;display:flex;align-items:center;gap:.45rem;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,.5)}
     .fc ul a i{font-size:.65rem}.fc ul a:hover{color:var(--gold)}
-    .footer-bottom{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.15);padding:1.4rem 3rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.85);background:rgba(5,15,35,.55);backdrop-filter:blur(6px)}
+    .footer-bottom{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.15);padding:1.4rem 3rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.85);background:rgba(8,5,0,0.65);backdrop-filter:blur(6px)}
     .footer-bottom a{color:var(--gold);text-decoration:none;font-weight:700}
     .wa-float{position:fixed;bottom:2rem;right:2rem;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.75rem;color:white;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.45);z-index:9999;transition:transform .3s;animation:waPop 2.5s ease-in-out infinite}
     .wa-float:hover{transform:scale(1.12)}
     @keyframes waPop{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}50%{box-shadow:0 4px 40px rgba(37,211,102,.7),0 0 0 12px rgba(37,211,102,.08)}}
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}.reveal.on{opacity:1;transform:translateY(0)}
+    @keyframes revFadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}} .reveal{animation:revFadeUp .7s ease both .2s} .reveal-l{animation:revFadeL .7s ease both .2s} .reveal-r{animation:revFadeR .7s ease both .2s}
     .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease}.reveal-l.on{opacity:1;transform:translateX(0)}
     .reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s ease,transform .65s ease}.reveal-r.on{opacity:1;transform:translateX(0)}
-    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
+    .delay-1{animation-delay:.15s}.delay-2{animation-delay:.25s}.delay-3{animation-delay:.35s}.delay-4{animation-delay:.45s}
 
     @media(max-width:1024px){.news-grid{grid-template-columns:repeat(2,1fr)}.featured-card{grid-template-columns:1fr}}
     @media(max-width:768px){
@@ -430,6 +430,7 @@
       <div class="footer-bottom">
         <p>© 2024 TRU Global Recruitment &amp; Consultants. All rights reserved.</p>
         <p><a href="https://truglobalrec.co.nz" target="_blank">truglobalrec.co.nz</a></p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5)">Social &amp; Digital by <a href="#" style="color:var(--gold);font-weight:700">SocialIgnit</a></p>
       </div>
     </div>
   </footer>
@@ -528,8 +529,9 @@
     frame();
   })();
 
-  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.1});
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.05,rootMargin:'0px 0px 60px 0px'});
   document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+  setTimeout(()=>document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>el.classList.add('on')),900);
   </script>
 </body>
 </html>

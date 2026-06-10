@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
-      --gold:#FFD700;--gold-light:#FFE55C;--gold-dark:#B8860B;
-      --red:#D4840A;--red-dark:#A85F00;
-      --black:#0A0A0A;--dark:#111111;--dark2:#1a1a1a;
+      --gold:#FFB830;--gold-light:#FFE060;--gold-dark:#B07000;
+      --red:#8A4500;--red-dark:#5A2800;
+      --black:#080500;--dark:#0F0800;--dark2:#1C1000;
       --text:#333333;--text-light:#666666;--white:#FFFFFF;
-      --gradient:linear-gradient(135deg,#FFD700 0%,#CC0000 100%);
-      --gradient-lr:linear-gradient(90deg,#FFD700 0%,#CC0000 100%);
-      --gradient-tb:linear-gradient(180deg,#FFD700 0%,#CC0000 100%);
+      --gradient:linear-gradient(135deg,#FFE060 0%,#B07000 100%);
+      --gradient-lr:linear-gradient(90deg,#FFE060 0%,#B07000 100%);
+      --gradient-tb:linear-gradient(180deg,#FFE060 0%,#B07000 100%);
     }
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -157,7 +157,7 @@
     .fc ul a{color:rgba(255,255,255,.88);text-decoration:none;font-size:.88rem;transition:color .3s;display:flex;align-items:center;gap:.45rem;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,.5)}
     .fc ul a i{font-size:.65rem}
     .fc ul a:hover{color:var(--gold)}
-    .footer-bottom{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.15);padding:1.4rem 3rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.85);background:rgba(5,15,35,.55);backdrop-filter:blur(6px)}
+    .footer-bottom{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.15);padding:1.4rem 3rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.85);background:rgba(8,5,0,0.65);backdrop-filter:blur(6px)}
     .footer-bottom a{color:var(--gold);text-decoration:none;font-weight:700}
 
     /* WA FLOAT */
@@ -166,14 +166,14 @@
     @keyframes waPop{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}50%{box-shadow:0 4px 40px rgba(37,211,102,.7),0 0 0 12px rgba(37,211,102,.08)}}
 
     /* REVEAL */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-    .reveal.on{opacity:1;transform:translateY(0)}
-    .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease}
-    .reveal-l.on{opacity:1;transform:translateX(0)}
-    .reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s ease,transform .65s ease}
-    .reveal-r.on{opacity:1;transform:translateX(0)}
-    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
-    .delay-4{transition-delay:.4s}.delay-5{transition-delay:.5s}
+    @keyframes revFadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+    @keyframes revFadeL{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+    @keyframes revFadeR{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+    .reveal{animation:revFadeUp .7s ease both .2s}
+    .reveal-l{animation:revFadeL .7s ease both .2s}
+    .reveal-r{animation:revFadeR .7s ease both .2s}
+    .delay-1{animation-delay:.15s}.delay-2{animation-delay:.25s}.delay-3{animation-delay:.35s}
+    .delay-4{animation-delay:.45s}.delay-5{animation-delay:.55s}
 
     /* RESPONSIVE */
     @media(max-width:1024px){.svcs-grid{grid-template-columns:repeat(2,1fr)}.testi-grid{grid-template-columns:repeat(2,1fr)}}
@@ -520,6 +520,7 @@
       <div class="footer-bottom">
         <p>© 2024 TRU Global Recruitment &amp; Consultants. All rights reserved.</p>
         <p><a href="https://truglobalrec.co.nz" target="_blank">truglobalrec.co.nz</a></p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5)">Social &amp; Digital by <a href="#" style="color:var(--gold);font-weight:700">SocialIgnit</a></p>
       </div>
     </div>
   </footer>
@@ -616,8 +617,9 @@
     frame();
   })();
 
-  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.1});
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.05,rootMargin:'0px 0px 60px 0px'});
   document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+  setTimeout(()=>document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>el.classList.add('on')),900);
   </script>
 </body>
 </html>
