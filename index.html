@@ -110,7 +110,7 @@
     #globeCanvas { width: 100%; max-width: 520px; height: 520px; display: block; }
     .globe-glow {
       position: absolute; width: 380px; height: 380px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(204,0,0,0.18) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,201,167,0.18) 0%, transparent 70%);
       animation: glowPulse 4s ease-in-out infinite; pointer-events: none;
     }
     @keyframes glowPulse { 0%,100%{transform:scale(1);opacity:.9} 50%{transform:scale(1.12);opacity:.4} }
@@ -174,7 +174,7 @@
     .about-badge {
       position: absolute; bottom: -1.5rem; right: -1.5rem;
       background: var(--gradient-lr); color: white; padding: 1.4rem 1.8rem;
-      border-radius: 16px; box-shadow: 0 10px 30px rgba(204,0,0,0.3); text-align: center;
+      border-radius: 16px; box-shadow: 0 10px 30px rgba(0,201,167,0.3); text-align: center;
     }
     .about-badge .big { font-size: 2rem; font-weight: 900; display: block; line-height: 1; }
     .about-badge .small { font-size: 0.75rem; opacity: 0.9; margin-top: 0.2rem; }
@@ -192,9 +192,9 @@
       padding: 0.88rem 1.9rem; background: var(--gradient-lr); color: white;
       border-radius: 10px; font-size: 0.97rem; font-weight: 700;
       text-decoration: none; transition: all 0.35s; margin-top: 1.5rem;
-      box-shadow: 0 4px 20px rgba(204,0,0,0.25);
+      box-shadow: 0 4px 20px rgba(0,201,167,0.25);
     }
-    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(204,0,0,0.4); }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,201,167,0.4); }
 
     /* ===== SERVICES ===== */
     #services { background: white; }
@@ -211,7 +211,7 @@
     .svc-card:hover { transform: translateY(-9px); box-shadow: 0 20px 55px rgba(0,0,0,0.09); border-color: transparent; }
     .svc-icon {
       width: 62px; height: 62px; border-radius: 15px;
-      background: linear-gradient(135deg, rgba(0,201,167,0.12), rgba(204,0,0,0.09));
+      background: linear-gradient(135deg, rgba(0,201,167,0.12), rgba(0,122,99,0.09));
       display: flex; align-items: center; justify-content: center;
       font-size: 1.7rem; margin-bottom: 1.4rem; transition: all 0.35s;
     }
@@ -291,7 +291,7 @@
       background: var(--gradient-lr); z-index: -1; opacity: 0; transition: opacity 0.35s;
     }
     .cty-card:hover::before { opacity: 1; }
-    .cty-card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(204,0,0,0.2); }
+    .cty-card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(0,201,167,0.2); }
     .cty-flag { width: 52px; height: 36px; object-fit: cover; border-radius: 5px; display: block; margin-bottom: 0.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
     .cty-name { font-weight: 800; font-size: 0.88rem; color: var(--black); }
 
@@ -344,7 +344,7 @@
       padding: 0.58rem 1.2rem; background: var(--gradient-lr); color: white;
       border-radius: 8px; font-size: 0.83rem; font-weight: 700; text-decoration: none; transition: all 0.3s;
     }
-    .btn-apply:hover { transform: translateX(3px); box-shadow: 0 5px 18px rgba(204,0,0,0.3); }
+    .btn-apply:hover { transform: translateX(3px); box-shadow: 0 5px 18px rgba(0,201,167,0.3); }
     .jobs-cta { text-align: center; margin-top: 3rem; }
 
     /* ===== CONTACT ===== */
@@ -405,7 +405,7 @@
       border: none; border-radius: 12px; font-size: 0.98rem; font-weight: 800;
       cursor: pointer; transition: all 0.35s; font-family: 'Inter', sans-serif; letter-spacing: 0.02em;
     }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(204,0,0,0.4); }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,201,167,0.4); }
 
     /* ===== FOOTER ===== */
     #footer { color: white; position: relative; overflow: hidden; margin-top: -1px; background: #020D14; }
@@ -1155,7 +1155,7 @@
 
       // Outer glow
       const outerGlow = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.4);
-      outerGlow.addColorStop(0, 'rgba(200,0,0,0.12)');
+      outerGlow.addColorStop(0, 'rgba(0,190,160,0.12)');
       outerGlow.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.beginPath(); ctx.arc(cx, cy, R * 1.4, 0, Math.PI * 2);
       ctx.fillStyle = outerGlow; ctx.fill();
