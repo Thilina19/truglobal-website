@@ -87,8 +87,10 @@
     }
     .badge-dot { width: 7px; height: 7px; background: #25D366; border-radius: 50%; animation: blink 1.8s ease-in-out infinite; }
     @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
-    .hero-title { font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.08; margin-bottom: 1.4rem; }
-    .hero-title .accent { display: block; background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-company { font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 900; color: white; line-height: 1.05; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .hero-company .accent { background: var(--gradient-lr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-title { font-size: clamp(1.2rem, 2vw, 1.7rem); font-weight: 700; color: rgba(255,255,255,0.7); line-height: 1.4; margin-bottom: 1.4rem; letter-spacing: 0.01em; }
+    .hero-title .accent { display: block; color: rgba(255,255,255,0.7); background: none; -webkit-text-fill-color: rgba(255,255,255,0.7); }
     .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.62); line-height: 1.85; margin-bottom: 2.5rem; max-width: 490px; }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-wa {
@@ -543,6 +545,7 @@
           <div class="badge-dot"></div>
           New Zealand's Pioneer Recruitment Firm
         </div>
+        <div class="hero-company">TRU Global <span class="accent">Recruitment</span> &amp; Consultants</div>
         <h1 class="hero-title">
           Connecting
           <span class="accent">Global Talent</span>
